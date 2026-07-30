@@ -1,9 +1,10 @@
 /*==================================================
-            FICHA DO ALUNO
+            FICHA DO ALUNO.JS
+        Visualização completa do aluno
 ==================================================*/
 
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", () => {
 
     carregarFicha();
 
@@ -13,6 +14,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+
+/*==================================================
+            CARREGAR FICHA
+==================================================*/
 
 
 function carregarFicha() {
@@ -29,8 +34,7 @@ function carregarFicha() {
 
         alert("Nenhum aluno selecionado.");
 
-        window.location.href =
-            "alunos.html";
+        window.location.href = "alunos.html";
 
         return;
 
@@ -39,21 +43,20 @@ function carregarFicha() {
 
 
 
-    const alunos =
-        Storage.getAlunos();
+
+
+
+    const alunos = Storage.getAlunos();
 
 
 
 
+    const aluno = alunos.find(item =>
 
-    const aluno =
-        alunos.find(function(item) {
+        Number(item.id) === id
 
+    );
 
-            return item.id === id;
-
-
-        });
 
 
 
@@ -64,8 +67,7 @@ function carregarFicha() {
 
         alert("Aluno não encontrado.");
 
-        window.location.href =
-            "alunos.html";
+        window.location.href = "alunos.html";
 
         return;
 
@@ -76,21 +78,19 @@ function carregarFicha() {
 
 
 
-    // Buscar nome da turma
-
-    const turmas =
-        Storage.getTurmas();
 
 
-
-    const turmaAluno =
-        turmas.find(function(turma) {
+    const turmas = Storage.getTurmas();
 
 
-            return turma.id === aluno.turmaId;
 
 
-        });
+
+    const turmaAluno = turmas.find(turma =>
+
+        Number(turma.id) === Number(aluno.turmaId)
+
+    );
 
 
 
@@ -98,9 +98,42 @@ function carregarFicha() {
 
 
 
+    preencherDados(
+
+        aluno,
+
+        turmaAluno
+
+    );
 
 
-    const nome =
+
+
+
+    carregarHistorico(id);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+            PREENCHER DADOS
+==================================================*/
+
+
+function preencherDados(aluno, turmaAluno) {
+
+
+
+    const nomeAluno =
         document.getElementById(
             "nomeAluno"
         );
@@ -121,7 +154,7 @@ function carregarFicha() {
 
 
 
-    const dataNascimento =
+    const data =
         document.getElementById(
             "dataNascimento"
         );
@@ -160,14 +193,10 @@ function carregarFicha() {
 
 
 
+    if(nomeAluno){
 
-
-    if (nome) {
-
-
-        nome.textContent =
+        nomeAluno.textContent =
             aluno.nome || "-";
-
 
     }
 
@@ -177,15 +206,25 @@ function carregarFicha() {
 
 
 
-    if (turma) {
+    if(turma){
 
 
         turma.textContent =
+
             "Turma: " +
+
             (
-                turmaAluno ?
-                turmaAluno.nome :
-                "-"
+
+                turmaAluno
+
+                ?
+
+                turmaAluno.nome
+
+                :
+
+                "Sem turma"
+
             );
 
 
@@ -197,14 +236,25 @@ function carregarFicha() {
 
 
 
-    if (necessidade) {
+    if(necessidade){
 
 
         necessidade.textContent =
+
             "Necessidade: " +
+
             (
-                aluno.necessidade ||
+
+                aluno.necessidade
+
+                ?
+
+                aluno.necessidade
+
+                :
+
                 "-"
+
             );
 
 
@@ -216,11 +266,10 @@ function carregarFicha() {
 
 
 
-    if (dataNascimento) {
+    if(data){
 
 
-
-        dataNascimento.textContent =
+        data.textContent =
 
             aluno.dataNascimento
 
@@ -230,10 +279,9 @@ function carregarFicha() {
                 aluno.dataNascimento
             )
 
-        :
+            :
 
-        "-";
-
+            "-";
 
 
     }
@@ -244,9 +292,7 @@ function carregarFicha() {
 
 
 
-
-    if (idade) {
-
+    if(idade){
 
 
         idade.textContent =
@@ -257,13 +303,13 @@ function carregarFicha() {
 
             Utils.calcularIdade(
                 aluno.dataNascimento
-            ) +
+            )
+            +
             " anos"
 
-        :
+            :
 
-        "-";
-
+            "-";
 
 
     }
@@ -274,16 +320,14 @@ function carregarFicha() {
 
 
 
-
-    if (responsavel) {
-
+    if(responsavel){
 
 
         responsavel.textContent =
+
             aluno.responsavel || "-";
 
 
-
     }
 
 
@@ -292,16 +336,14 @@ function carregarFicha() {
 
 
 
-
-    if (observacao) {
-
+    if(observacao){
 
 
         observacao.textContent =
+
             aluno.observacao || "-";
 
 
-
     }
 
 
@@ -310,24 +352,23 @@ function carregarFicha() {
 
 
 
-
-    if (foto && aluno.foto) {
-
+    if(foto){
 
 
         foto.src =
-            aluno.foto;
 
+            aluno.foto
+
+            ?
+
+            aluno.foto
+
+            :
+
+            "assets/avatar.png";
 
 
     }
-
-
-
-
-
-
-    carregarHistorico(id);
 
 
 
@@ -346,18 +387,19 @@ function carregarFicha() {
 ==================================================*/
 
 
-function carregarHistorico(id) {
+function carregarHistorico(id){
 
 
 
     const tabela =
+
         document.getElementById(
             "historicoAtendimentos"
         );
 
 
 
-    if (!tabela) {
+    if(!tabela){
 
         return;
 
@@ -370,6 +412,7 @@ function carregarHistorico(id) {
 
 
     const atendimentos =
+
         Storage.getAtendimentos();
 
 
@@ -377,16 +420,14 @@ function carregarHistorico(id) {
 
 
 
+
     const registros =
-        atendimentos.filter(function(item) {
 
+        atendimentos.filter(item =>
 
+            Number(item.alunoId) === Number(id)
 
-            return item.alunoId === id;
-
-
-
-        });
+        );
 
 
 
@@ -403,8 +444,7 @@ function carregarHistorico(id) {
 
 
 
-    if (registros.length === 0) {
-
+    if(registros.length === 0){
 
 
         tabela.innerHTML = `
@@ -434,8 +474,7 @@ function carregarHistorico(id) {
 
 
 
-
-    registros.forEach(function(item) {
+    registros.forEach(item => {
 
 
 
@@ -503,10 +542,11 @@ function carregarHistorico(id) {
 ==================================================*/
 
 
-function voltarAlunos() {
+function voltarAlunos(){
 
 
     window.location.href =
+
         "alunos.html";
 
 
@@ -525,22 +565,23 @@ function voltarAlunos() {
 ==================================================*/
 
 
-function editarAluno() {
+function editarAluno(){
 
 
 
-    const id =
-        Number(
-            localStorage.getItem(
-                "alunoSelecionado"
-            )
-        );
+    const id = Number(
+
+        localStorage.getItem(
+            "alunoSelecionado"
+        )
+
+    );
 
 
 
 
 
-    if (!id) {
+    if(!id){
 
 
         alert(
@@ -572,7 +613,9 @@ function editarAluno() {
 
 
 
+
     window.location.href =
+
         "aluno.html";
 
 
