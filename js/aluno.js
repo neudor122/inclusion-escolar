@@ -10,8 +10,6 @@ let alunoEditando = null;
 
 
 
-
-
 document.addEventListener("DOMContentLoaded", () => {
 
 
@@ -25,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 });
-
 
 
 
@@ -61,6 +58,7 @@ function eventos() {
 
 
     }
+
 
 
 
@@ -109,8 +107,10 @@ function carregarTurmas() {
 
 
 
+
     const turmas =
         Storage.getTurmas();
+
 
 
 
@@ -121,16 +121,18 @@ function carregarTurmas() {
 
 
 
+
     if (turmas.length === 0) {
+
 
 
         select.innerHTML = `
 
-            <option value="">
+        <option value="">
 
-                Nenhuma turma cadastrada
+            Nenhuma turma cadastrada
 
-            </option>
+        </option>
 
         `;
 
@@ -138,11 +140,6 @@ function carregarTurmas() {
 
         select.disabled = true;
 
-
-
-        Utils.mensagem(
-            "Cadastre uma turma antes de adicionar alunos."
-        );
 
 
         return;
@@ -160,15 +157,17 @@ function carregarTurmas() {
 
 
 
+
     select.innerHTML = `
 
-        <option value="">
+    <option value="">
 
-            Selecione uma turma
+        Selecione uma turma
 
-        </option>
+    </option>
 
     `;
+
 
 
 
@@ -181,11 +180,13 @@ function carregarTurmas() {
 
         select.innerHTML += `
 
-            <option value="${turma.id}">
 
-                ${turma.nome}
+        <option value="${turma.id}">
 
-            </option>
+            ${turma.nome}
+
+        </option>
+
 
         `;
 
@@ -206,18 +207,20 @@ function carregarTurmas() {
 
 
 /*==================================================
-                VERIFICAR EDIÇÃO
+            VERIFICAR EDIÇÃO
 ==================================================*/
 
 
 function verificarEdicao() {
 
 
-    const id =
+    const id = Number(
 
-        Number(
-            localStorage.getItem("alunoEditando")
-        );
+        localStorage.getItem(
+            "alunoEditando"
+        )
+
+    );
 
 
 
@@ -229,100 +232,133 @@ function verificarEdicao() {
 
 
 
+
+
     alunoEditando = id;
 
 
 
-    const alunos =
-        Storage.getAlunos();
-
 
 
     const aluno =
-        alunos.find(
-            item => item.id === id
-        );
+        Storage.getAluno(id);
+
+
 
 
 
     if (!aluno) {
 
+
         return;
+
 
     }
 
 
 
 
-    document.getElementById("tituloFormulario")
-        .textContent =
-        "Editar Aluno";
+
+
+    const titulo =
+        document.getElementById(
+            "tituloFormulario"
+        );
 
 
 
-    document.getElementById("descricaoFormulario")
-        .textContent =
-        "Atualize os dados do aluno.";
+    if(titulo){
 
+        titulo.textContent =
+            "Editar aluno";
 
-
-    document.getElementById("botaoSalvar")
-        .textContent =
-        "Salvar alterações";
-
+    }
 
 
 
 
-    document.getElementById("nome")
-        .value =
+
+
+
+    const descricao =
+        document.getElementById(
+            "descricaoFormulario"
+        );
+
+
+
+    if(descricao){
+
+        descricao.textContent =
+            "Atualize os dados do aluno.";
+
+    }
+
+
+
+
+
+
+
+
+    document.getElementById("nome").value =
         aluno.nome || "";
 
 
 
-    document.getElementById("dataNascimento")
-        .value =
+    document.getElementById("dataNascimento").value =
         aluno.dataNascimento || "";
 
 
 
-    document.getElementById("responsavel")
-        .value =
+    document.getElementById("responsavel").value =
         aluno.responsavel || "";
 
 
 
-    document.getElementById("necessidade")
-        .value =
+    document.getElementById("necessidade").value =
         aluno.necessidade || "";
 
 
 
-    document.getElementById("observacao")
-        .value =
+    document.getElementById("observacao").value =
         aluno.observacao || "";
 
 
 
 
 
-    setTimeout(() => {
 
 
-        document.getElementById("turma")
-            .value =
-            aluno.turmaId;
+    setTimeout(()=>{
+
+
+        const turma =
+            document.getElementById(
+                "turma"
+            );
+
+
+        if(turma){
+
+            turma.value =
+                aluno.turmaId;
+
+        }
 
 
 
-    }, 100);
+    },200);
 
 
 
 
 
 
-    if (aluno.foto) {
+
+
+    if(aluno.foto){
+
 
 
         fotoAluno =
@@ -337,7 +373,7 @@ function verificarEdicao() {
 
 
 
-        if (preview) {
+        if(preview){
 
             preview.src =
                 aluno.foto;
@@ -346,309 +382,6 @@ function verificarEdicao() {
 
 
     }
-
-
-}
-
-
-
-
-
-
-
-
-
-/*==================================================
-                FOTO
-==================================================*/
-
-
-function carregarFoto(event) {
-
-
-    const arquivo =
-        event.target.files[0];
-
-
-
-    if (!arquivo) {
-
-        return;
-
-    }
-
-
-
-
-
-    const leitor =
-        new FileReader();
-
-
-
-
-
-    leitor.onload = function(e) {
-
-
-        fotoAluno =
-            e.target.result;
-
-
-
-
-        const preview =
-            document.getElementById(
-                "previewFoto"
-            );
-
-
-
-        if (preview) {
-
-
-            preview.src =
-                fotoAluno;
-
-
-        }
-
-
-    };
-
-
-
-
-
-    leitor.readAsDataURL(arquivo);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/*==================================================
-            SALVAR ALUNO
-==================================================*/
-
-
-function salvarAluno(event) {
-
-
-    event.preventDefault();
-
-
-
-
-
-
-    const turmaId =
-
-        document
-        .getElementById("turma")
-        .value;
-
-
-
-
-
-    if (!turmaId) {
-
-
-        Utils.mensagem(
-            "Selecione uma turma."
-        );
-
-
-        return;
-
-
-    }
-
-
-
-
-
-
-
-    const dados = {
-
-
-
-        nome:
-
-            document
-            .getElementById("nome")
-            .value
-            .trim(),
-
-
-
-
-        dataNascimento:
-
-            document
-            .getElementById("dataNascimento")
-            .value,
-
-
-
-
-
-        turmaId,
-
-
-
-
-
-        responsavel:
-
-            document
-            .getElementById("responsavel")
-            .value
-            .trim(),
-
-
-
-
-
-        necessidade:
-
-            document
-            .getElementById("necessidade")
-            .value,
-
-
-
-
-
-        observacao:
-
-            document
-            .getElementById("observacao")
-            .value,
-
-
-
-
-
-        foto:
-
-            fotoAluno
-
-
-
-
-    };
-
-
-
-
-
-
-
-
-
-    // EDIÇÃO
-
-    if (alunoEditando) {
-
-
-
-        Storage.updateAluno(
-
-            alunoEditando,
-
-            dados
-
-        );
-
-
-
-        Utils.mensagem(
-
-            "Aluno atualizado com sucesso!"
-
-        );
-
-
-
-        localStorage.removeItem(
-            "alunoEditando"
-        );
-
-
-
-    }
-
-
-
-    // NOVO CADASTRO
-    else {
-
-
-
-        const aluno = {
-
-
-            id:
-
-                Utils.gerarId(),
-
-
-
-            ...dados
-
-
-
-        };
-
-
-
-        Storage.addAluno(aluno);
-
-
-
-        Utils.mensagem(
-
-            "Aluno cadastrado com sucesso!"
-
-        );
-
-
-    }
-
-
-
-
-
-
-
-    event.target.reset();
-
-
-
-    fotoAluno = "";
-
-
-
-
-
-    setTimeout(() => {
-
-
-        window.location.href =
-            "alunos.html";
-
-
-    }, 500);
 
 
 
