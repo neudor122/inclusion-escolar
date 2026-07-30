@@ -1,6 +1,5 @@
 /*==================================================
-            FICHA DO ALUNO.JS
-        Visualização completa do aluno
+            FICHA DO ALUNO
 ==================================================*/
 
 
@@ -15,17 +14,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-/*==================================================
-            CARREGAR FICHA
-==================================================*/
-
-
 function carregarFicha() {
 
 
-    const id = Number(
-        localStorage.getItem("alunoSelecionado")
-    );
+    const id =
+        Number(
+            localStorage.getItem("alunoSelecionado")
+        );
 
 
 
@@ -34,7 +29,8 @@ function carregarFicha() {
 
         alert("Nenhum aluno selecionado.");
 
-        window.location.href = "alunos.html";
+        window.location.href =
+            "alunos.html";
 
         return;
 
@@ -45,18 +41,17 @@ function carregarFicha() {
 
 
 
-
-    const alunos = Storage.getAlunos();
-
-
+    const alunos =
+        Storage.getAlunos();
 
 
-    const aluno = alunos.find(item =>
 
-        Number(item.id) === id
 
-    );
 
+    const aluno =
+        alunos.find(
+            item => item.id == id
+        );
 
 
 
@@ -67,7 +62,8 @@ function carregarFicha() {
 
         alert("Aluno não encontrado.");
 
-        window.location.href = "alunos.html";
+        window.location.href =
+            "alunos.html";
 
         return;
 
@@ -79,32 +75,149 @@ function carregarFicha() {
 
 
 
-
-    const turmas = Storage.getTurmas();
-
-
-
-
-
-    const turmaAluno = turmas.find(turma =>
-
-        Number(turma.id) === Number(aluno.turmaId)
-
-    );
+    const turmas =
+        Storage.getTurmas();
 
 
 
 
 
+    const turmaAluno =
+        turmas.find(
+            turma =>
+            turma.id == aluno.turmaId
+        );
 
 
-    preencherDados(
 
-        aluno,
 
-        turmaAluno
 
-    );
+
+
+
+
+    document.getElementById("nomeAluno")
+        .textContent =
+        aluno.nome || "-";
+
+
+
+
+
+
+
+    document.getElementById("turmaAluno")
+        .textContent =
+        "Turma: " +
+        (
+            turmaAluno
+            ?
+            turmaAluno.nome
+            :
+            "-"
+        );
+
+
+
+
+
+
+
+    document.getElementById("necessidadeAluno")
+        .textContent =
+        "Necessidade: " +
+        (
+            aluno.necessidade
+            ||
+            "-"
+        );
+
+
+
+
+
+
+
+
+    document.getElementById("dataNascimento")
+        .textContent =
+        aluno.dataNascimento
+        ?
+        Utils.formatarData(
+            aluno.dataNascimento
+        )
+        :
+        "-";
+
+
+
+
+
+
+
+
+    document.getElementById("idadeAluno")
+        .textContent =
+        aluno.dataNascimento
+        ?
+        Utils.calcularIdade(
+            aluno.dataNascimento
+        )
+        +
+        " anos"
+        :
+        "-";
+
+
+
+
+
+
+
+
+    document.getElementById("responsavelAluno")
+        .textContent =
+        aluno.responsavel
+        ||
+        "-";
+
+
+
+
+
+
+
+
+    document.getElementById("observacaoAluno")
+        .textContent =
+        aluno.observacao
+        ||
+        "-";
+
+
+
+
+
+
+
+
+
+    const foto =
+        document.getElementById(
+            "fotoAluno"
+        );
+
+
+
+    if(foto && aluno.foto){
+
+
+        foto.src =
+            aluno.foto;
+
+
+    }
+
 
 
 
@@ -125,265 +238,7 @@ function carregarFicha() {
 
 
 /*==================================================
-            PREENCHER DADOS
-==================================================*/
-
-
-function preencherDados(aluno, turmaAluno) {
-
-
-
-    const nomeAluno =
-        document.getElementById(
-            "nomeAluno"
-        );
-
-
-
-    const turma =
-        document.getElementById(
-            "turmaAluno"
-        );
-
-
-
-    const necessidade =
-        document.getElementById(
-            "necessidadeAluno"
-        );
-
-
-
-    const data =
-        document.getElementById(
-            "dataNascimento"
-        );
-
-
-
-    const idade =
-        document.getElementById(
-            "idadeAluno"
-        );
-
-
-
-    const responsavel =
-        document.getElementById(
-            "responsavelAluno"
-        );
-
-
-
-    const observacao =
-        document.getElementById(
-            "observacaoAluno"
-        );
-
-
-
-    const foto =
-        document.getElementById(
-            "fotoAluno"
-        );
-
-
-
-
-
-
-
-    if(nomeAluno){
-
-        nomeAluno.textContent =
-            aluno.nome || "-";
-
-    }
-
-
-
-
-
-
-
-    if(turma){
-
-
-        turma.textContent =
-
-            "Turma: " +
-
-            (
-
-                turmaAluno
-
-                ?
-
-                turmaAluno.nome
-
-                :
-
-                "Sem turma"
-
-            );
-
-
-    }
-
-
-
-
-
-
-
-    if(necessidade){
-
-
-        necessidade.textContent =
-
-            "Necessidade: " +
-
-            (
-
-                aluno.necessidade
-
-                ?
-
-                aluno.necessidade
-
-                :
-
-                "-"
-
-            );
-
-
-    }
-
-
-
-
-
-
-
-    if(data){
-
-
-        data.textContent =
-
-            aluno.dataNascimento
-
-            ?
-
-            Utils.formatarData(
-                aluno.dataNascimento
-            )
-
-            :
-
-            "-";
-
-
-    }
-
-
-
-
-
-
-
-    if(idade){
-
-
-        idade.textContent =
-
-            aluno.dataNascimento
-
-            ?
-
-            Utils.calcularIdade(
-                aluno.dataNascimento
-            )
-            +
-            " anos"
-
-            :
-
-            "-";
-
-
-    }
-
-
-
-
-
-
-
-    if(responsavel){
-
-
-        responsavel.textContent =
-
-            aluno.responsavel || "-";
-
-
-    }
-
-
-
-
-
-
-
-    if(observacao){
-
-
-        observacao.textContent =
-
-            aluno.observacao || "-";
-
-
-    }
-
-
-
-
-
-
-
-    if(foto){
-
-
-        foto.src =
-
-            aluno.foto
-
-            ?
-
-            aluno.foto
-
-            :
-
-            "assets/avatar.png";
-
-
-    }
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/*==================================================
-        HISTÓRICO DE ATENDIMENTOS
+        HISTÓRICO
 ==================================================*/
 
 
@@ -392,7 +247,6 @@ function carregarHistorico(id){
 
 
     const tabela =
-
         document.getElementById(
             "historicoAtendimentos"
         );
@@ -412,7 +266,6 @@ function carregarHistorico(id){
 
 
     const atendimentos =
-
         Storage.getAtendimentos();
 
 
@@ -420,13 +273,10 @@ function carregarHistorico(id){
 
 
 
-
     const registros =
-
-        atendimentos.filter(item =>
-
-            Number(item.alunoId) === Number(id)
-
+        atendimentos.filter(
+            item =>
+            item.alunoId == id
         );
 
 
@@ -435,8 +285,8 @@ function carregarHistorico(id){
 
 
 
-
     tabela.innerHTML = "";
+
 
 
 
@@ -464,8 +314,8 @@ function carregarHistorico(id){
 
         return;
 
-
     }
+
 
 
 
@@ -480,47 +330,34 @@ function carregarHistorico(id){
 
         tabela.innerHTML += `
 
-
         <tr>
 
 
             <td>
 
-                ${
-                    Utils.formatarData(
-                        item.data
-                    )
-                }
+                ${Utils.formatarData(item.data)}
 
             </td>
-
 
 
             <td>
 
-                ${
-                    item.profissional || "-"
-                }
+                ${item.profissional || "-"}
 
             </td>
-
 
 
             <td>
 
-                ${
-                    item.descricao || "-"
-                }
+                ${item.descricao || "-"}
 
             </td>
-
 
 
         </tr>
 
 
         `;
-
 
 
     });
@@ -546,7 +383,6 @@ function voltarAlunos(){
 
 
     window.location.href =
-
         "alunos.html";
 
 
@@ -559,9 +395,8 @@ function voltarAlunos(){
 
 
 
-
 /*==================================================
-                EDITAR ALUNO
+                EDITAR
 ==================================================*/
 
 
@@ -569,28 +404,22 @@ function editarAluno(){
 
 
 
-    const id = Number(
-
-        localStorage.getItem(
-            "alunoSelecionado"
-        )
-
-    );
-
-
+    const id =
+        Number(
+            localStorage.getItem(
+                "alunoSelecionado"
+            )
+        );
 
 
 
     if(!id){
 
-
         alert(
-            "Não foi possível editar este aluno."
+            "Aluno inválido."
         );
 
-
         return;
-
 
     }
 
@@ -598,24 +427,16 @@ function editarAluno(){
 
 
 
-
-
     localStorage.setItem(
-
         "alunoEditando",
-
         id
-
     );
 
 
 
 
 
-
-
     window.location.href =
-
         "aluno.html";
 
 
