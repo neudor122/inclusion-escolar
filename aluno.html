@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Aluno | Inclusão Escolar</title>
+
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/responsive.css">
+
+
+</head>
+
+
+<body>
+
+
+
+    <aside class="sidebar">
+
+
+        <div class="logo">
+
+
+            <div class="logo-icon">
+
+                📘
+
+            </div>
+
+
+            <div>
+
+                <h2>
+                    Inclusão Escolar
+                </h2>
+
+
+                <span>
+                Gestão Inclusiva
+            </span>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <nav>
+
+
+            <a href="index.html">
+
+            🏠 Início
+
+        </a>
+
+
+
+            <a href="turmas.html">
+
+            📚 Turmas
+
+        </a>
+
+
+
+            <a href="alunos.html" class="ativo">
+
+            👨‍🎓 Alunos
+
+        </a>
+
+
+
+            <a href="atendimento.html">
+
+            📝 Atendimento
+
+        </a>
+
+
+
+            <a href="relatorios.html">
+
+            📊 Relatórios
+
+        </a>
+
+
+        </nav>
+
+
+    </aside>
+
+
+
+
+
+
+
+    <main class="conteudo">
+
+
+
+        <header class="topbar">
+
+
+            <div>
+
+
+                <h1 id="tituloFormulario">
+
+                    Cadastro de Aluno
+
+                </h1>
+
+
+
+                <p id="descricaoFormulario">
+
+                    Adicione um novo aluno ao sistema.
+
+                </p>
+
+
+            </div>
+
+
+
+        </header>
+
+
+
+
+
+
+
+
+
+        <section class="card">
+
+
+
+            <form id="formAluno">
+
+
+
+
+
+                <div class="campo">
+
+
+                    <label>
+
+    Foto do aluno
+
+</label>
+
+
+                    <input type="file" id="fotoAluno" accept="image/*">
+
+
+
+                    <img id="previewFoto" src="assets/avatar.png" alt="Foto do aluno" style="
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+margin-top:10px;
+">
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+                <div class="campo">
+
+
+                    <label>
+
+    Nome completo
+
+</label>
+
+
+
+                    <input type="text" id="nome" required>
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+                <div class="campo">
+
+
+                    <label>
+
+    Data de nascimento
+
+</label>
+
+
+
+                    <input type="date" id="dataNascimento" required>
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+                <div class="campo">
+
+
+                    <label>
+
+    Turma
+
+</label>
+
+
+
+                    <select id="turma" required>
+
+
+<option value="">
+
+Carregando turmas...
+
+</option>
+
+
+</select>
+
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+                <div class="campo">
+
+
+                    <label>
+
+    Responsável
+
+</label>
+
+
+
+                    <input type="text" id="responsavel">
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+                <div class="campo">
+
+
+                    <label>
+
+    Necessidade específica
+
+</label>
+
+
+
+
+                    <select id="necessidade">
+
+
+
+<option value="">
+
+Selecione
+
+</option>
+
+
+
+<option value="TEA">
+
+TEA
+
+</option>
+
+
+
+<option value="TDAH">
+
+TDAH
+
+</option>
+
+
+
+<option value="Deficiência Intelectual">
+
+Deficiência Intelectual
+
+</option>
+
+
+
+<option value="Deficiência Física">
+
+Deficiência Física
+
+</option>
+
+
+
+<option value="Outra">
+
+Outra
+
+</option>
+
+
+
+</select>
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+                <div class="campo">
+
+
+                    <label>
+
+    Observações
+
+</label>
+
+
+
+                    <textarea id="observacao"></textarea>
+
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+                <button class="btn btn-primary" id="botaoSalvar" type="submit">
+
+
+Salvar aluno
+
+
+</button>
+
+
+
+
+
+
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='alunos.html'">
+
+
+Cancelar
+
+
+</button>
+
+
+
+
+
+            </form>
+
+
+
+
+
+        </section>
+
+
+
+
+
+    </main>
+
+
+
+
+
+
+
+
+    <script src="js/storage.js"></script>
+
+    <script src="js/utils.js"></script>
+
+    <script src="js/aluno.js"></script>
+
+
+
+</body>
+
+
+</html>

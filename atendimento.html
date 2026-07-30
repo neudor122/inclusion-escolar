@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Atendimentos | Inclusão Escolar</title>
+
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/responsive.css">
+
+
+</head>
+
+
+<body>
+
+
+
+    <!-- =========================
+        SIDEBAR
+========================= -->
+
+
+    <aside class="sidebar">
+
+
+        <div class="logo">
+
+
+            <div class="logo-icon">
+
+                📘
+
+            </div>
+
+
+            <div>
+
+                <h2>
+                    Inclusão Escolar
+                </h2>
+
+
+                <span>
+Gestão Inclusiva
+</span>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <nav>
+
+
+            <a href="index.html">
+
+🏠 Início
+
+</a>
+
+
+
+
+            <a href="turmas.html">
+
+📚 Turmas
+
+</a>
+
+
+
+
+            <a href="alunos.html">
+
+👨‍🎓 Alunos
+
+</a>
+
+
+
+
+
+            <a href="atendimento.html" class="ativo">
+
+📝 Atendimento
+
+</a>
+
+
+
+
+
+            <a href="relatorios.html">
+
+📊 Relatórios
+
+</a>
+
+
+
+
+        </nav>
+
+
+    </aside>
+
+
+
+
+
+
+
+
+
+    <!-- =========================
+        CONTEÚDO
+========================= -->
+
+
+    <main class="conteudo">
+
+
+
+        <header class="topbar">
+
+
+            <div>
+
+
+                <h1>
+
+                    Registro de Atendimento
+
+                </h1>
+
+
+
+                <p>
+
+                    Registre os acompanhamentos realizados.
+
+                </p>
+
+
+            </div>
+
+
+
+        </header>
+
+
+
+
+
+
+
+
+
+        <section class="card">
+
+
+
+            <form id="formAtendimento">
+
+
+
+
+
+
+                <div class="campo">
+
+
+                    <label>
+
+Aluno
+
+</label>
+
+
+
+                    <select id="aluno" required>
+
+
+<option value="">
+
+Carregando alunos...
+
+</option>
+
+
+</select>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <div class="campo">
+
+
+                    <label>
+
+Data do atendimento
+
+</label>
+
+
+
+                    <input type="date" id="data" required>
+
+
+
+                </div>
+
+
+
+
+
+
+
+                <div class="campo">
+
+
+                    <label>
+
+Profissional responsável
+
+</label>
+
+
+
+                    <input type="text" id="profissional" placeholder="Nome do profissional" required>
+
+
+
+                </div>
+
+
+
+
+
+
+
+
+                <div class="campo">
+
+
+                    <label>
+
+Descrição do atendimento
+
+</label>
+
+
+
+                    <textarea id="descricao" placeholder="Descreva as atividades realizadas" required>
+
+</textarea>
+
+
+
+                </div>
+
+
+
+
+
+
+
+
+                <button class="btn btn-primary" type="submit">
+
+
+Salvar atendimento
+
+
+</button>
+
+
+
+
+
+            </form>
+
+
+
+
+        </section>
+
+
+
+
+
+
+
+
+
+        <section class="card">
+
+
+            <h2>
+
+                Histórico de atendimentos
+
+            </h2>
+
+
+
+
+
+            <table>
+
+
+                <thead>
+
+
+                    <tr>
+
+
+                        <th>
+
+                            Aluno
+
+                        </th>
+
+
+
+                        <th>
+
+                            Data
+
+                        </th>
+
+
+
+                        <th>
+
+                            Profissional
+
+                        </th>
+
+
+
+                        <th>
+
+                            Descrição
+
+                        </th>
+
+
+
+                        <th>
+
+                            Ação
+
+                        </th>
+
+
+                    </tr>
+
+
+                </thead>
+
+
+
+
+
+                <tbody id="listaAtendimentos">
+
+
+                </tbody>
+
+
+
+
+
+            </table>
+
+
+
+        </section>
+
+
+
+
+
+
+    </main>
+
+
+
+
+
+
+
+
+    <script src="js/storage.js"></script>
+
+    <script src="js/utils.js"></script>
+
+    <script src="js/atendimento.js"></script>
+
+
+
+</body>
+
+</html>

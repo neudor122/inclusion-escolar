@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Turmas | Inclusão Escolar</title>
+
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/responsive.css">
+
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+        MENU LATERAL
+========================= -->
+
+
+    <aside class="sidebar">
+
+
+        <div class="logo">
+
+            <div class="logo-icon">
+
+                📘
+
+            </div>
+
+
+            <div>
+
+                <h2>
+
+                    Inclusão Escolar
+
+                </h2>
+
+
+                <span>
+
+                Gestão Inclusiva
+
+            </span>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+        <nav>
+
+
+            <a href="index.html">
+
+            🏠 Início
+
+        </a>
+
+
+            <a href="turmas.html" class="ativo">
+
+            📚 Turmas
+
+        </a>
+
+
+            <a href="alunos.html">
+
+            👨‍🎓 Alunos
+
+        </a>
+
+
+            <a href="atendimento.html">
+
+            📝 Atendimento
+
+        </a>
+
+
+            <a href="relatorios.html">
+
+            📊 Relatórios
+
+        </a>
+
+
+        </nav>
+
+
+    </aside>
+
+
+
+
+
+    <!-- =========================
+        CONTEÚDO
+========================= -->
+
+
+    <main class="conteudo">
+
+
+        <header class="topbar">
+
+
+            <div>
+
+                <h1>
+
+                    Turmas
+
+                </h1>
+
+
+                <p>
+
+                    Gerencie as turmas cadastradas no sistema.
+
+                </p>
+
+
+            </div>
+
+
+
+            <button class="btn btn-primary" id="btnNovaTurma">
+
+
+        + Nova Turma
+
+
+    </button>
+
+
+        </header>
+
+
+
+
+
+        <!-- =========================
+        PESQUISA
+========================= -->
+
+
+        <section class="search">
+
+
+            <input type="text" id="pesquisa" placeholder="Pesquisar turma...">
+
+
+        </section>
+
+
+
+
+
+        <!-- =========================
+        LISTA DE TURMAS
+========================= -->
+
+
+        <section class="lista" id="listaTurmas">
+
+
+        </section>
+
+
+
+
+
+    </main>
+
+
+
+
+
+
+    <!-- =========================
+        MODAL NOVA TURMA
+========================= -->
+
+
+    <div class="modal" id="modalTurma">
+
+
+        <div class="modal-content">
+
+
+
+            <h2>
+
+                Nova Turma
+
+            </h2>
+
+
+
+            <br>
+
+
+
+            <div class="form-grid">
+
+
+
+                <div class="form-group">
+
+
+                    <label>
+
+                    Nome da turma
+
+                </label>
+
+
+                    <input type="text" id="nomeTurma" placeholder="Ex: 5º Ano A">
+
+
+                </div>
+
+
+
+
+
+                <div class="form-group">
+
+
+                    <label>
+
+                    Sala
+
+                </label>
+
+
+                    <input type="text" id="salaTurma" placeholder="Ex: Sala 03">
+
+
+                </div>
+
+
+
+
+
+                <div class="form-group">
+
+
+                    <label>
+
+                    Professor(a)
+
+                </label>
+
+
+                    <input type="text" id="professorTurma" placeholder="Nome do professor">
+
+
+                </div>
+
+
+
+
+
+                <div class="form-group">
+
+
+                    <label>
+
+                    Turno
+
+                </label>
+
+
+                    <select id="turnoTurma">
+
+
+                    <option value="Manhã">
+
+                        Manhã
+
+                    </option>
+
+
+                    <option value="Tarde">
+
+                        Tarde
+
+                    </option>
+
+
+                    <option value="Integral">
+
+                        Integral
+
+                    </option>
+
+
+                    <option value="Noite">
+
+                        Noite
+
+                    </option>
+
+
+                </select>
+
+
+                </div>
+
+
+
+
+            </div>
+
+
+
+
+            <br>
+
+
+
+
+            <button class="btn btn-primary" id="salvarTurma">
+
+
+            Salvar Turma
+
+
+        </button>
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+    <!-- =========================
+        SCRIPTS
+========================= -->
+
+
+    <script src="js/storage.js"></script>
+
+    <script src="js/utils.js"></script>
+
+    <script src="js/turmas.js"></script>
+
+
+
+</body>
+
+
+</html>
