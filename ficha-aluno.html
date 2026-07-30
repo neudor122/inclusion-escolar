@@ -1,76 +1,103 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 
 <head>
 
-    ```
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Ficha do Aluno - Inclusão Escolar</title>
 
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css"> ```
+
+    <link rel="stylesheet" href="css/responsive.css">
 
 </head>
 
+
 <body>
 
-    <header class="topo">
 
-        ```
-        <h1>Inclusão Escolar</h1>
+<header class="topo">
 
-        <nav>
 
-            <a href="index.html">
-        Início
-    </a>
+    <h1>
+        Inclusão Escolar
+    </h1>
 
-            <a href="turmas.html">
-        Turmas
-    </a>
 
-            <a href="alunos.html" class="ativo">
-        Alunos
-    </a>
+    <nav>
 
-            <a href="atendimento.html">
-        Atendimento
-    </a>
+        <a href="index.html">
+            Início
+        </a>
 
-            <a href="relatorios.html">
-        Relatórios
-    </a>
 
-        </nav>
-        ```
+        <a href="turmas.html">
+            Turmas
+        </a>
 
-    </header>
 
-    <main class="container">
+        <a href="alunos.html" class="ativo">
+            Alunos
+        </a>
 
-        <section class="titulo-pagina">
 
-            ```
-            <h2>
-                Ficha do Aluno
-            </h2>
+        <a href="atendimento.html">
+            Atendimento
+        </a>
 
-            <p>
-                Informações completas do aluno acompanhado.
-            </p>
-            ```
 
-        </section>
+        <a href="relatorios.html">
+            Relatórios
+        </a>
 
-        <section class="card">
 
-            <div class="perfil">
+    </nav>
 
-                ```
-                <img id="fotoAluno" src="assets/avatar.png" alt="Foto do aluno" style="
+
+</header>
+
+
+
+
+
+<main class="container">
+
+
+
+<section class="titulo-pagina">
+
+
+    <h2>
+        Ficha do Aluno
+    </h2>
+
+
+    <p>
+        Informações completas do aluno acompanhado.
+    </p>
+
+
+</section>
+
+
+
+
+
+
+<section class="card">
+
+
+<div class="perfil">
+
+
+    <img 
+    id="fotoAluno"
+    src="assets/avatar.png"
+    alt="Foto do aluno"
+    style="
     width:120px;
     height:120px;
     border-radius:50%;
@@ -78,126 +105,247 @@
     ">
 
 
-                <div>
 
-                    <h2 id="nomeAluno">
-                        -
-                    </h2>
+    <div>
 
-                    <p id="turmaAluno">
-                        Turma: -
-                    </p>
 
-                    <p id="necessidadeAluno">
-                        Necessidade: -
-                    </p>
+        <h2 id="nomeAluno">
+            -
+        </h2>
 
-                </div>
-                ```
 
-            </div>
+        <p id="turmaAluno">
+            Turma: -
+        </p>
 
-        </section>
 
-        <section class="card">
+        <p id="necessidadeAluno">
+            Necessidade: -
+        </p>
 
-            <h2>
-                Dados pessoais
-            </h2>
 
-            <p>
-                <strong>Data de nascimento:</strong>
+    </div>
 
-                <span id="dataNascimento">
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section class="card">
+
+
+<h2>
+    Dados pessoais
+</h2>
+
+
+
+<p>
+
+<strong>
+Data de nascimento:
+</strong>
+
+
+<span id="dataNascimento">
 -
 </span>
 
-            </p>
 
-            <p>
-                <strong>Idade:</strong>
+</p>
 
-                <span id="idadeAluno">
+
+
+
+
+<p>
+
+<strong>
+Idade:
+</strong>
+
+
+<span id="idadeAluno">
 -
 </span>
 
-            </p>
 
-            <p>
-                <strong>Responsável:</strong>
+</p>
 
-                <span id="responsavelAluno">
+
+
+
+
+<p>
+
+<strong>
+Responsável:
+</strong>
+
+
+<span id="responsavelAluno">
 -
 </span>
 
-            </p>
 
-            <p>
-                <strong>Observações:</strong>
+</p>
 
-                <span id="observacaoAluno">
+
+
+
+
+<p>
+
+<strong>
+Observações:
+</strong>
+
+
+<span id="observacaoAluno">
 -
 </span>
 
-            </p>
 
-        </section>
+</p>
 
-        <section class="card">
 
-            <h2>
-                Histórico de atendimentos
-            </h2>
 
-            <table>
+</section>
 
-                <thead>
 
-                    <tr>
 
-                        <th>
-                            Data
-                        </th>
 
-                        <th>
-                            Profissional
-                        </th>
 
-                        <th>
-                            Descrição
-                        </th>
 
-                    </tr>
 
-                </thead>
 
-                <tbody id="historicoAtendimentos">
 
-                </tbody>
+<section class="card">
 
-            </table>
 
-        </section>
+<h2>
+    Histórico de atendimentos
+</h2>
 
-        <button class="botao" onclick="editarAluno()">
+
+
+<div class="table-container">
+
+
+<table>
+
+
+<thead>
+
+
+<tr>
+
+
+<th>
+    Data
+</th>
+
+
+<th>
+    Profissional
+</th>
+
+
+<th>
+    Descrição
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+<tbody id="historicoAtendimentos">
+
+
+</tbody>
+
+
+
+
+</table>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<div style="margin-top:20px;">
+
+
+
+<button 
+class="btn btn-primary"
+onclick="editarAluno()">
 
 Editar aluno
 
 </button>
 
 
-        <button class="botao" onclick="voltarAlunos()">
+
+
+
+<button 
+class="btn btn-secondary"
+onclick="voltarAlunos()">
 
 Voltar
 
 </button>
-    </main>
 
-    <script src="js/storage.js"></script>
 
-    <script src="js/utils.js"></script>
 
-    <script src="js/ficha-aluno.js"></script>
+</div>
+
+
+
+
+
+</main>
+
+
+
+
+
+
+
+
+
+<script src="js/storage.js"></script>
+
+<script src="js/utils.js"></script>
+
+<script src="js/ficha-aluno.js"></script>
+
+
 
 </body>
 
