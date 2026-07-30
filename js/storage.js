@@ -8,12 +8,13 @@
 const Storage = {
 
 
+
 /*==================================================
                     TURMAS
 ==================================================*/
 
 
-getTurmas() {
+getTurmas(){
 
 
     return JSON.parse(
@@ -29,7 +30,7 @@ getTurmas() {
 
 
 
-saveTurmas(lista) {
+saveTurmas(lista){
 
 
     localStorage.setItem(
@@ -47,37 +48,21 @@ saveTurmas(lista) {
 
 
 
-addTurma(turma) {
+addTurma(turma){
 
 
-    const lista = this.getTurmas();
+    const lista =
+        this.getTurmas();
+
 
 
     lista.push(turma);
 
 
+
     this.saveTurmas(lista);
 
 
-},
-
-
-
-
-
-getTurma(id) {
-
-
-    return this.getTurmas()
-
-    .find(
-
-        turma =>
-
-        String(turma.id) === String(id)
-
-    );
-
 
 },
 
@@ -85,20 +70,43 @@ getTurma(id) {
 
 
 
-updateTurma(id,dados) {
+getTurma(id){
 
 
-    const lista = this.getTurmas();
+    return this
+        .getTurmas()
+        .find(
+            turma =>
+            Number(turma.id)
+            ===
+            Number(id)
+        );
+
+
+},
 
 
 
-    const index = lista.findIndex(
 
-        turma =>
 
-        String(turma.id) === String(id)
+updateTurma(id,dados){
 
-    );
+
+    const lista =
+        this.getTurmas();
+
+
+
+    const index =
+        lista.findIndex(
+
+            turma =>
+
+            Number(turma.id)
+            ===
+            Number(id)
+
+        );
 
 
 
@@ -116,6 +124,7 @@ updateTurma(id,dados) {
         };
 
 
+
         this.saveTurmas(lista);
 
 
@@ -131,16 +140,18 @@ updateTurma(id,dados) {
 removeTurma(id){
 
 
+    const lista =
 
-    const lista = this.getTurmas()
+        this.getTurmas()
+        .filter(
 
-    .filter(
+            turma =>
 
-        turma =>
+            Number(turma.id)
+            !==
+            Number(id)
 
-        String(turma.id) !== String(id)
-
-    );
+        );
 
 
 
@@ -181,7 +192,6 @@ getAlunos(){
 saveAlunos(lista){
 
 
-
     localStorage.setItem(
 
         "alunos",
@@ -189,7 +199,6 @@ saveAlunos(lista){
         JSON.stringify(lista)
 
     );
-
 
 
 },
@@ -202,7 +211,8 @@ addAluno(aluno){
 
 
 
-    const lista = this.getAlunos();
+    const lista =
+        this.getAlunos();
 
 
 
@@ -223,16 +233,17 @@ addAluno(aluno){
 getAluno(id){
 
 
+    return this
+        .getAlunos()
+        .find(
 
-    return this.getAlunos()
+            aluno =>
 
-    .find(
+            Number(aluno.id)
+            ===
+            Number(id)
 
-        aluno =>
-
-        String(aluno.id) === String(id)
-
-    );
+        );
 
 
 
@@ -245,22 +256,22 @@ getAluno(id){
 updateAluno(id,dados){
 
 
-
-    const lista = this.getAlunos();
-
-
-
-    const index = lista.findIndex(
+    const lista =
+        this.getAlunos();
 
 
-        aluno =>
 
-        String(aluno.id) === String(id)
+    const index =
 
+        lista.findIndex(
 
-    );
+            aluno =>
 
+            Number(aluno.id)
+            ===
+            Number(id)
 
+        );
 
 
 
@@ -271,16 +282,12 @@ updateAluno(id,dados){
         lista[index] = {
 
 
-
             ...lista[index],
-
 
             ...dados
 
 
-
         };
-
 
 
 
@@ -293,23 +300,27 @@ updateAluno(id,dados){
 
 
 },
- 
+
+
+
+
 
 removeAluno(id){
 
 
 
-    const lista = this.getAlunos()
+    const lista =
 
-    .filter(
+        this.getAlunos()
+        .filter(
 
+            aluno =>
 
-        aluno =>
+            Number(aluno.id)
+            !==
+            Number(id)
 
-        String(aluno.id) !== String(id)
-
-
-    );
+        );
 
 
 
@@ -324,9 +335,8 @@ removeAluno(id){
 
 
 
-
 /*==================================================
-        RELAÇÃO ALUNO / TURMA
+            RELAÇÃO TURMA / ALUNO
 ==================================================*/
 
 
@@ -334,24 +344,21 @@ getAlunosDaTurma(turmaId){
 
 
 
-    return this.getAlunos()
+    return this
+        .getAlunos()
+        .filter(
 
-    .filter(
+            aluno =>
 
+            Number(aluno.turmaId)
+            ===
+            Number(turmaId)
 
-
-        aluno =>
-
-        String(aluno.turmaId) === String(turmaId)
-
-
-
-    );
+        );
 
 
 
 },
-
 
 
 
@@ -360,30 +367,20 @@ getAlunosDaTurma(turmaId){
 contarAlunosTurma(turmaId){
 
 
-
-    return this.getAlunosDaTurma(
-
-        turmaId
-
-    ).length;
+    return this
+        .getAlunosDaTurma(turmaId)
+        .length;
 
 
 
 },
 
-
-
-
-
-
-
-/*==================================================
+  /*==================================================
                 ATENDIMENTOS
 ==================================================*/
 
 
 getAtendimentos(){
-
 
 
     return JSON.parse(
@@ -403,7 +400,6 @@ getAtendimentos(){
 saveAtendimentos(lista){
 
 
-
     localStorage.setItem(
 
         "atendimentos",
@@ -411,7 +407,6 @@ saveAtendimentos(lista){
         JSON.stringify(lista)
 
     );
-
 
 
 },
@@ -423,8 +418,8 @@ saveAtendimentos(lista){
 addAtendimento(atendimento){
 
 
-
-    const lista = this.getAtendimentos();
+    const lista =
+        this.getAtendimentos();
 
 
 
@@ -445,19 +440,17 @@ addAtendimento(atendimento){
 getAtendimento(id){
 
 
+    return this
+        .getAtendimentos()
+        .find(
 
-    return this.getAtendimentos()
+            item =>
 
-    .find(
+            Number(item.id)
+            ===
+            Number(id)
 
-
-        item =>
-
-        String(item.id) === String(id)
-
-
-    );
-
+        );
 
 
 },
@@ -469,34 +462,32 @@ getAtendimento(id){
 updateAtendimento(id,dados){
 
 
-
-    const lista = this.getAtendimentos();
-
-
-
-    const index = lista.findIndex(
+    const lista =
+        this.getAtendimentos();
 
 
-        item =>
 
-        String(item.id) === String(id)
+    const index =
 
+        lista.findIndex(
 
-    );
+            item =>
 
+            Number(item.id)
+            ===
+            Number(id)
 
+        );
 
 
 
     if(index !== -1){
 
 
-
         lista[index] = {
 
 
             ...lista[index],
-
 
             ...dados
 
@@ -512,7 +503,6 @@ updateAtendimento(id,dados){
     }
 
 
-
 },
 
 
@@ -523,17 +513,18 @@ removeAtendimento(id){
 
 
 
-    const lista = this.getAtendimentos()
+    const lista =
 
-    .filter(
+        this.getAtendimentos()
+        .filter(
 
+            item =>
 
-        item =>
+            Number(item.id)
+            !==
+            Number(id)
 
-        String(item.id) !== String(id)
-
-
-    );
+        );
 
 
 
@@ -550,28 +541,37 @@ removeAtendimento(id){
 
 
 /*==================================================
-                EXPORTAÇÃO / IMPORTAÇÃO
-        (preparação para botão no index)
+                    AVISOS
 ==================================================*/
 
 
-exportarDados(){
+getAvisos(){
 
 
-    return {
-
-
-        turmas:this.getTurmas(),
-
-
-        alunos:this.getAlunos(),
-
-
-        atendimentos:this.getAtendimentos()
+    return localStorage.getItem(
+        "avisos"
+    ) || "";
 
 
 
-    };
+},
+
+
+
+
+
+saveAvisos(texto){
+
+
+
+    localStorage.setItem(
+
+        "avisos",
+
+        texto
+
+    );
+
 
 
 },
@@ -581,51 +581,268 @@ exportarDados(){
 
 
 
-importarDados(dados){
+
+/*==================================================
+                EXPORTAR DADOS
+==================================================*/
+
+
+exportarDados(){
 
 
 
-    if(dados.turmas){
+    const dados = {
 
 
-        this.saveTurmas(
 
-            dados.turmas
+        turmas:
+            this.getTurmas(),
 
+
+
+        alunos:
+            this.getAlunos(),
+
+
+
+        atendimentos:
+            this.getAtendimentos(),
+
+
+
+        avisos:
+            this.getAvisos()
+
+
+
+    };
+
+
+
+
+
+    const arquivo = new Blob(
+
+        [
+            JSON.stringify(
+                dados,
+                null,
+                2
+            )
+        ],
+
+        {
+            type:
+            "application/json"
+        }
+
+    );
+
+
+
+
+
+    const url =
+        URL.createObjectURL(
+            arquivo
         );
 
 
-    }
 
 
 
-
-    if(dados.alunos){
-
-
-        this.saveAlunos(
-
-            dados.alunos
-
+    const link =
+        document.createElement(
+            "a"
         );
 
 
-    }
+
+
+
+    link.href = url;
+
+
+
+    link.download =
+        "backup-inclusao-escolar.json";
 
 
 
 
-    if(dados.atendimentos){
+
+    link.click();
 
 
-        this.saveAtendimentos(
-
-            dados.atendimentos
-
-        );
 
 
-    }
+
+    URL.revokeObjectURL(url);
+
+
+
+},
+
+
+
+
+
+
+
+/*==================================================
+                IMPORTAR DADOS
+==================================================*/
+
+
+importarDados(arquivo){
+
+
+
+    const leitor =
+        new FileReader();
+
+
+
+
+
+    leitor.onload = function(e){
+
+
+
+        try {
+
+
+
+            const dados =
+                JSON.parse(
+                    e.target.result
+                );
+
+
+
+
+
+            if(dados.turmas){
+
+
+                localStorage.setItem(
+
+                    "turmas",
+
+                    JSON.stringify(
+                        dados.turmas
+                    )
+
+                );
+
+
+            }
+
+
+
+
+
+            if(dados.alunos){
+
+
+                localStorage.setItem(
+
+                    "alunos",
+
+                    JSON.stringify(
+                        dados.alunos
+                    )
+
+                );
+
+
+            }
+
+
+
+
+
+
+            if(dados.atendimentos){
+
+
+                localStorage.setItem(
+
+                    "atendimentos",
+
+                    JSON.stringify(
+                        dados.atendimentos
+                    )
+
+                );
+
+
+            }
+
+
+
+
+
+
+            if(dados.avisos !== undefined){
+
+
+                localStorage.setItem(
+
+                    "avisos",
+
+                    dados.avisos
+
+                );
+
+
+            }
+
+
+
+
+
+
+            alert(
+
+                "Backup importado com sucesso!"
+
+            );
+
+
+
+            location.reload();
+
+
+
+
+
+        } catch(error){
+
+
+
+            alert(
+
+                "Arquivo de backup inválido."
+
+            );
+
+
+
+        }
+
+
+
+
+    };
+
+
+
+
+
+    leitor.readAsText(
+        arquivo
+    );
 
 
 
@@ -646,13 +863,27 @@ limparTudo(){
 
 
 
-    localStorage.removeItem("turmas");
+    localStorage.removeItem(
+        "turmas"
+    );
 
 
-    localStorage.removeItem("alunos");
+
+    localStorage.removeItem(
+        "alunos"
+    );
 
 
-    localStorage.removeItem("atendimentos");
+
+    localStorage.removeItem(
+        "atendimentos"
+    );
+
+
+
+    localStorage.removeItem(
+        "avisos"
+    );
 
 
 
@@ -661,5 +892,4 @@ limparTudo(){
 
 
 };
-
   
