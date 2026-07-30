@@ -1,31 +1,44 @@
 /*==================================================
-                RELATORIOS.JS
-        Relatórios do sistema
+            RELATÓRIOS.JS
+      Painel de informações do sistema
 ==================================================*/
 
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    carregarRelatorios();
+
+    carregarResumo();
+
+
+    carregarNecessidades();
+
+
+    carregarTurmas();
+
+
 
 });
 
 
 
+
+
 /*==================================================
-            CARREGAR RELATÓRIOS
+                RESUMO
 ==================================================*/
 
 
-function carregarRelatorios() {
+function carregarResumo(){
 
 
     const turmas =
         Storage.getTurmas();
 
 
+
     const alunos =
         Storage.getAlunos();
+
 
 
     const atendimentos =
@@ -34,35 +47,63 @@ function carregarRelatorios() {
 
 
 
-    document.getElementById("totalTurmas")
-        .textContent =
-        turmas.length;
+
+    const totalTurmas =
+        document.getElementById(
+            "totalTurmas"
+        );
 
 
 
-    document.getElementById("totalAlunos")
-        .textContent =
-        alunos.length;
+    const totalAlunos =
+        document.getElementById(
+            "totalAlunos"
+        );
 
 
 
-    document.getElementById("totalAtendimentos")
-        .textContent =
-        atendimentos.length;
+    const totalAtendimentos =
+        document.getElementById(
+            "totalAtendimentos"
+        );
 
 
 
-    gerarRelatorioNecessidades(alunos);
+
+
+    if(totalTurmas){
+
+        totalTurmas.textContent =
+            turmas.length;
+
+    }
 
 
 
-    gerarRelatorioTurmas(
-        turmas,
-        alunos
-    );
+
+
+    if(totalAlunos){
+
+        totalAlunos.textContent =
+            alunos.length;
+
+    }
+
+
+
+
+
+    if(totalAtendimentos){
+
+        totalAtendimentos.textContent =
+            atendimentos.length;
+
+    }
 
 
 }
+
+
 
 
 
@@ -74,30 +115,43 @@ function carregarRelatorios() {
 ==================================================*/
 
 
-function gerarRelatorioNecessidades(alunos) {
+function carregarNecessidades(){
 
 
-    const container =
+    const div =
         document.getElementById(
             "relatorioNecessidades"
         );
 
 
 
-    container.innerHTML = "";
+    if(!div){
+
+        return;
+
+    }
 
 
 
-    if (alunos.length === 0) {
 
 
-        container.innerHTML = `
+    const alunos =
+        Storage.getAlunos();
 
-            <p class="vazio">
 
-                Nenhum aluno cadastrado.
 
-            </p>
+
+
+    if(alunos.length === 0){
+
+
+        div.innerHTML = `
+
+        <p class="vazio">
+
+        Nenhum aluno cadastrado.
+
+        </p>
 
         `;
 
@@ -109,28 +163,35 @@ function gerarRelatorioNecessidades(alunos) {
 
 
 
-    const grupos = {};
+
+
+    let lista = {};
+
+
 
 
 
     alunos.forEach(aluno => {
 
 
-        const necessidade =
-            aluno.necessidade || "Não informado";
+
+        let necessidade =
+            aluno.necessidade ||
+            "Sem necessidade informada";
 
 
 
-        if (!grupos[necessidade]) {
+        if(!lista[necessidade]){
 
 
-            grupos[necessidade] = 0;
+            lista[necessidade] = 0;
 
 
         }
 
 
-        grupos[necessidade]++;
+
+        lista[necessidade]++;
 
 
 
@@ -140,23 +201,29 @@ function gerarRelatorioNecessidades(alunos) {
 
 
 
-    Object.keys(grupos).forEach(item => {
+
+    div.innerHTML = "";
 
 
-        container.innerHTML += `
 
 
-            <p>
 
-                <strong>
-                    ${item}
-                </strong>
 
-                :
-                
-                ${grupos[item]} aluno(s)
+    Object.keys(lista).forEach(item => {
 
-            </p>
+
+
+        div.innerHTML += `
+
+
+        <p>
+
+        🔹 ${item}: 
+        <strong>${lista[item]}</strong>
+
+        aluno(s)
+
+        </p>
 
 
         `;
@@ -166,7 +233,9 @@ function gerarRelatorioNecessidades(alunos) {
 
 
 
+
 }
+
 
 
 
@@ -180,40 +249,68 @@ function gerarRelatorioNecessidades(alunos) {
 ==================================================*/
 
 
-function gerarRelatorioTurmas(
-    turmas,
-    alunos
-) {
+function carregarTurmas(){
 
 
-    const container =
+
+    const div =
         document.getElementById(
             "relatorioTurmas"
         );
 
 
 
-    container.innerHTML = "";
+    if(!div){
+
+        return;
+
+    }
 
 
 
-    if (turmas.length === 0) {
 
 
-        container.innerHTML = `
+    const turmas =
+        Storage.getTurmas();
 
-            <p class="vazio">
 
-                Nenhuma turma cadastrada.
 
-            </p>
+    const alunos =
+        Storage.getAlunos();
+
+
+
+
+
+
+    if(turmas.length === 0){
+
+
+        div.innerHTML = `
+
+
+        <p class="vazio">
+
+        Nenhuma turma cadastrada.
+
+        </p>
+
 
         `;
 
 
         return;
 
+
     }
+
+
+
+
+
+
+
+    div.innerHTML = "";
 
 
 
@@ -226,9 +323,7 @@ function gerarRelatorioTurmas(
 
         const quantidade =
 
-            alunos.filter(
-
-                aluno =>
+            alunos.filter(aluno =>
 
                 aluno.turmaId == turma.id
 
@@ -238,33 +333,38 @@ function gerarRelatorioTurmas(
 
 
 
-        container.innerHTML += `
 
 
-            <p>
+        div.innerHTML += `
 
 
-                <strong>
-
-                    ${turma.nome}
-
-                </strong>
+        <p>
 
 
-                :
+        📚 ${turma.nome}
 
-                ${quantidade}
-                aluno(s)
+        -
+
+        <strong>
+
+        ${quantidade}
+
+        </strong>
+
+        aluno(s)
 
 
-            </p>
+        </p>
 
 
         `;
 
 
 
+
     });
+
+
 
 
 
