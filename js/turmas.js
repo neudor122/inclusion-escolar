@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
+
 /*==================================================
                 EVENTOS
 ==================================================*/
@@ -73,6 +75,8 @@ function configurarEventos() {
 
 
 
+
+
     if (pesquisa) {
 
         pesquisa.addEventListener(
@@ -81,6 +85,9 @@ function configurarEventos() {
         );
 
     }
+
+
+
 
 
 
@@ -131,6 +138,8 @@ function abrirModal() {
 
 
 
+
+
 function fecharModal(event) {
 
 
@@ -147,6 +156,7 @@ function fecharModal(event) {
 
 
 }
+
 
 
 
@@ -228,11 +238,13 @@ function salvarTurma() {
 
 
 
+
     const sala =
         document
         .getElementById("salaTurma")
         .value
         .trim();
+
 
 
 
@@ -244,10 +256,12 @@ function salvarTurma() {
 
 
 
+
     const turno =
         document
         .getElementById("turnoTurma")
         .value;
+
 
 
 
@@ -309,7 +323,11 @@ function salvarTurma() {
 
 
 
+
+
     Storage.addTurma(turma);
+
+
 
 
 
@@ -325,24 +343,14 @@ function salvarTurma() {
 
 
 
+
+
     Utils.mensagem(
 
         "Turma criada com sucesso!"
 
     );
-
-
-
-}
-
-
-
-
-
-
-
-
-
+   
 /*==================================================
             MOSTRAR TURMAS
 ==================================================*/
@@ -370,14 +378,10 @@ function renderizarTurmas(lista) {
 
 
 
+
     container.innerHTML = "";
 
 
-
-
-
-    const alunos =
-        Storage.getAlunos();
 
 
 
@@ -427,13 +431,21 @@ function renderizarTurmas(lista) {
 
 
 
+
+        /*
+            CORREÇÃO:
+            Usa Storage.contarAlunosTurma()
+            para evitar erro de número/string no ID
+        */
+
+
         const quantidade =
 
-            alunos.filter(aluno =>
+            Storage.contarAlunosTurma(
+                turma.id
+            );
 
-                aluno.turmaId === turma.id
 
-            ).length;
 
 
 
@@ -449,11 +461,17 @@ function renderizarTurmas(lista) {
 
 
 
+
+
             <h2>
 
                 ${turma.nome}
 
             </h2>
+
+
+
+
 
 
 
@@ -466,6 +484,10 @@ function renderizarTurmas(lista) {
 
 
 
+
+
+
+
             <p>
 
                 👨‍🏫 Professor:
@@ -475,22 +497,36 @@ function renderizarTurmas(lista) {
 
 
 
+
+
+
+
             <p>
 
                 🌞 Turno:
-                ${turma.turno}
+                ${turma.turno || "-"}
 
             </p>
+
+
+
+
 
 
 
             <p>
 
                 👨‍🎓
+
                 ${quantidade}
+
                 aluno(s)
 
             </p>
+
+
+
+
 
 
 
@@ -511,6 +547,10 @@ function renderizarTurmas(lista) {
 
 
 
+
+
+
+
             <button
 
             class="btn btn-danger"
@@ -522,6 +562,8 @@ function renderizarTurmas(lista) {
 
 
             </button>
+
+
 
 
 
@@ -538,6 +580,9 @@ function renderizarTurmas(lista) {
 
 
 }
+
+
+
 
 
 
@@ -572,6 +617,9 @@ function removerTurma(id) {
 
 
 
+
+
+
     Storage.removeTurma(id);
 
 
@@ -581,6 +629,9 @@ function removerTurma(id) {
 
 
 }
+
+
+
 
 
 
@@ -601,10 +652,16 @@ function pesquisarTurma() {
 
     const texto =
 
+
         document
+
         .getElementById("pesquisa")
+
         .value
+
         .toLowerCase();
+
+
 
 
 
@@ -614,13 +671,20 @@ function pesquisarTurma() {
 
     const resultado =
 
+
         turmas.filter(turma =>
 
 
 
+
+
             turma.nome
+
             .toLowerCase()
+
             .includes(texto)
+
+
 
 
 
@@ -631,13 +695,19 @@ function pesquisarTurma() {
 
 
 
+
     renderizarTurmas(
+
         resultado
+
     );
 
 
 
 }
+
+
+
 
 
 
@@ -668,6 +738,9 @@ function abrirTurma(id) {
 
 
 
+
+
+
     window.location.href =
 
         "alunos.html";
@@ -675,6 +748,9 @@ function abrirTurma(id) {
 
 
 }
+
+
+
 
 
 
@@ -710,17 +786,24 @@ function limparFormulario() {
 
 
 
+
+
     campos.forEach(id => {
 
 
+
         const campo =
+
             document.getElementById(id);
+
 
 
 
         if (campo) {
 
+
             campo.value = "";
+
 
         }
 
@@ -732,18 +815,30 @@ function limparFormulario() {
 
 
 
+
+
     const turno =
+
         document.getElementById(
+
             "turnoTurma"
+
         );
+
 
 
 
     if (turno) {
 
+
         turno.selectedIndex = 0;
 
+
     }
+
+
+
+}
 
 
 
