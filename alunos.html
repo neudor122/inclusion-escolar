@@ -4,534 +4,146 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 
     <title>Alunos | Inclusão Escolar</title>
 
-
     <link rel="stylesheet" href="css/style.css">
-
     <link rel="stylesheet" href="css/responsive.css">
-
 
 </head>
 
-
 <body>
 
-
-    <!-- =========================
-        MENU LATERAL
-========================= -->
-
+    <!-- MENU LATERAL -->
 
     <aside class="sidebar">
 
-
         <div class="logo">
 
-
             <div class="logo-icon">
-
                 📘
-
             </div>
-
 
             <div>
 
-                <h2>
-                    Inclusão Escolar
-                </h2>
+                <h2>Inclusão Escolar</h2>
 
-
-                <span>
-                Gestão Inclusiva
-            </span>
-
+                <span>Gestão Inclusiva</span>
 
             </div>
-
 
         </div>
 
-
-
-
-
         <nav>
 
-
             <a href="index.html">
-
-            🏠 Início
-
-        </a>
-
-
+                🏠 Início
+            </a>
 
             <a href="turmas.html">
-
-            📚 Turmas
-
-        </a>
-
-
+                📚 Turmas
+            </a>
 
             <a href="alunos.html" class="ativo">
-
-            👨‍🎓 Alunos
-
-        </a>
-
-
+                👨‍🎓 Alunos
+            </a>
 
             <a href="atendimento.html">
-
-            📝 Atendimento
-
-        </a>
-
-
+                📝 Atendimento
+            </a>
 
             <a href="relatorios.html">
-
-            📊 Relatórios
-
-        </a>
-
+                📊 Relatórios
+            </a>
 
         </nav>
 
-
-
     </aside>
 
-
-
-
-
-
-
-    <!-- =========================
-        CONTEÚDO
-========================= -->
-
+    <!-- CONTEÚDO -->
 
     <main class="conteudo">
 
-
-
         <header class="topbar">
-
 
             <div>
 
-                <h1>
-
-                    Alunos
-
-                </h1>
-
+                <h1>Alunos</h1>
 
                 <p>
-
                     Gerencie os alunos acompanhados pela inclusão escolar.
-
                 </p>
 
-
             </div>
-
-
 
         </header>
 
-
-
-
-
-
-
         <section class="card">
 
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                margin-bottom:20px;
+                flex-wrap:wrap;
+                gap:15px;
+            ">
 
-            <h2>
+                <div>
 
-                Cadastro de aluno
+                    <h2>Lista de alunos</h2>
 
-            </h2>
-
-
-            <br>
-
-
-
-
-            <form id="formAluno">
-
-
-
-
-
-                <div class="campo">
-
-
-                    <label>
-
-    Foto do aluno
-
-</label>
-
-
-                    <input type="file" id="fotoAluno" accept="image/*">
-
+                    <p>
+                        Visualize, edite ou acompanhe a ficha de cada aluno.
+                    </p>
 
                 </div>
 
-
-
-
-
-
-
-
-                <div class="campo">
-
-
-                    <label>
-
-    Nome completo
-
-</label>
-
-
-                    <input type="text" id="nome" placeholder="Nome do aluno" required>
-
-
-                </div>
-
-
-
-
-
-
-
-
-                <div class="campo">
-
-
-                    <label>
-
-    Data de nascimento
-
-</label>
-
-
-                    <input type="date" id="dataNascimento" required>
-
-
-                </div>
-
-
-
-
-
-
-
-
-                <div class="campo">
-
-
-                    <label>
-
-    Turma
-
-</label>
-
-
-
-                    <select id="turma" required>
-
-
-<option value="">
-
-    Carregando turmas...
-
-</option>
-
-
-</select>
-
-
-
-                </div>
-
-
-
-
-
-
-
-
-                <div class="campo">
-
-
-                    <label>
-
-    Responsável
-
-</label>
-
-
-                    <input type="text" id="responsavel" placeholder="Nome do responsável">
-
-
-                </div>
-
-
-
-
-
-
-
-
-                <div class="campo">
-
-
-                    <label>
-
-    Necessidade específica
-
-</label>
-
-
-
-                    <select id="necessidade">
-
-
-<option value="">
-
-    Selecione
-
-</option>
-
-
-
-<option value="TEA">
-
-    Transtorno do Espectro Autista (TEA)
-
-</option>
-
-
-
-<option value="TDAH">
-
-    TDAH
-
-</option>
-
-
-
-<option value="Deficiência Intelectual">
-
-    Deficiência Intelectual
-
-</option>
-
-
-
-<option value="Deficiência Física">
-
-    Deficiência Física
-
-</option>
-
-
-
-<option value="Outra">
-
-    Outra
-
-</option>
-
-
-</select>
-
-
-                </div>
-
-
-
-
-
-
-
-
-                <div class="campo">
-
-
-                    <label>
-
-    Observações
-
-</label>
-
-
-                    <textarea id="observacao" placeholder="Informações importantes sobre o aluno">
-
-</textarea>
-
-
-                </div>
-
-
-
-
-
-
-
-                <button type="submit" class="btn btn-primary">
-
-
-Cadastrar aluno
-
-
-</button>
-
-
-
-
-
-            </form>
-
-
-        </section>
-
-
-
-
-
-
-
-
-
-
-        <section class="card">
-
-
-            <h2>
-
-                Lista de alunos
-
-            </h2>
-
-
-
-
-            <div class="table-container">
-
-
-                <table>
-
-
-                    <thead>
-
-
-                        <tr>
-
-
-                            <th>
-
-                                Foto
-
-                            </th>
-
-
-
-                            <th>
-
-                                Nome
-
-                            </th>
-
-
-
-                            <th>
-
-                                Turma
-
-                            </th>
-
-
-
-                            <th>
-
-                                Necessidade
-
-                            </th>
-
-
-
-                            <th>
-
-                                Ações
-
-                            </th>
-
-
-
-                        </tr>
-
-
-                    </thead>
-
-
-
-
-                    <tbody id="listaAlunos">
-
-
-                    </tbody>
-
-
-
-
-                </table>
-
+                <a href="aluno.html" class="btn btn-primary">
+                    ➕ Novo aluno
+                </a>
 
             </div>
 
+            <div class="table-container">
 
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Foto</th>
+
+                            <th>Nome</th>
+
+                            <th>Turma</th>
+
+                            <th>Necessidade</th>
+
+                            <th>Ações</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="listaAlunos">
+
+                                            </tbody>
+
+                </table>
+
+            </div>
 
         </section>
 
-
-
-
-
-
     </main>
 
-
-
-
-
-
-
-
     <script src="js/storage.js"></script>
-
     <script src="js/utils.js"></script>
-
     <script src="js/alunos.js"></script>
 
-
-
 </body>
-
 
 </html>
