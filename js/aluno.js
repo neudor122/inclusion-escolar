@@ -386,3 +386,221 @@ function verificarEdicao() {
 
 
 }
+
+/*==================================================
+        HISTÓRICO DE ATENDIMENTOS
+==================================================*/
+
+
+function carregarHistorico(id) {
+
+
+    const tabela =
+        document.getElementById(
+            "historicoAtendimentos"
+        );
+
+
+    if (!tabela) {
+
+        return;
+
+    }
+
+
+
+
+
+    const atendimentos =
+        Storage.getAtendimentos();
+
+
+
+
+    const registros =
+        atendimentos.filter(item => {
+
+
+            return Number(item.alunoId) === Number(id);
+
+
+        });
+
+
+
+
+
+    tabela.innerHTML = "";
+
+
+
+
+    if (registros.length === 0) {
+
+
+        tabela.innerHTML = `
+
+            <tr>
+
+                <td colspan="3">
+
+                    Nenhum atendimento registrado.
+
+                </td>
+
+            </tr>
+
+        `;
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+
+    registros.forEach(item => {
+
+
+
+        tabela.innerHTML += `
+
+
+        <tr>
+
+
+            <td>
+
+                ${
+
+                    Utils.formatarData(
+                        item.data
+                    )
+
+                }
+
+            </td>
+
+
+
+            <td>
+
+                ${
+                    item.profissional || "-"
+                }
+
+            </td>
+
+
+
+            <td>
+
+                ${
+                    item.descricao || "-"
+                }
+
+            </td>
+
+
+
+        </tr>
+
+
+        `;
+
+
+
+    });
+
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+                EDITAR ALUNO
+==================================================*/
+
+
+function editarAluno() {
+
+
+
+    const id = Number(
+
+        localStorage.getItem(
+            "alunoSelecionado"
+        )
+
+    );
+
+
+
+
+    if (!id) {
+
+
+        Utils.mensagem(
+            "Não foi possível editar este aluno."
+        );
+
+
+        return;
+
+
+    }
+
+
+
+
+
+    localStorage.setItem(
+
+        "alunoEditando",
+
+        id
+
+    );
+
+
+
+
+
+    window.location.href =
+
+        "aluno.html";
+
+
+
+}
+
+
+
+
+
+
+
+/*==================================================
+                VOLTAR
+==================================================*/
+
+
+function voltarAlunos(){
+
+
+    window.location.href =
+
+        "alunos.html";
+
+
+}
