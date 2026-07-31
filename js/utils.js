@@ -1,4 +1,3 @@
-```javascript
 /*==================================================
                 UTILS.JS
         Funções auxiliares do sistema
@@ -550,4 +549,3 @@ const Utils = {
 
 
 };
-```
