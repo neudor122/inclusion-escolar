@@ -1,6 +1,6 @@
 /*==================================================
                 UTILS.JS
-Funções auxiliares do sistema
+        Funções auxiliares do sistema
 ==================================================*/
 
 const Utils = {
@@ -8,78 +8,98 @@ const Utils = {
     /*=========================================
                 GERAR ID
     =========================================*/
-
     gerarId() {
-
         return Date.now();
-
     },
 
     /*=========================================
             CALCULAR IDADE
     =========================================*/
-
     calcularIdade(dataNascimento) {
 
         if (!dataNascimento) return "";
 
-        const hoje = new Date();
+        const partes = dataNascimento.split("-");
 
-        const nascimento = new Date(dataNascimento);
+        if (partes.length !== 3) return "";
+
+        const nascimento = new Date(
+            Number(partes[0]),
+            Number(partes[1]) - 1,
+            Number(partes[2])
+        );
+
+        const hoje = new Date();
 
         let idade = hoje.getFullYear() - nascimento.getFullYear();
 
         const mes = hoje.getMonth() - nascimento.getMonth();
 
         if (
-
             mes < 0 ||
-
             (mes === 0 && hoje.getDate() < nascimento.getDate())
-
         ) {
-
             idade--;
-
         }
 
         return idade;
-
     },
 
     /*=========================================
             DATA BRASILEIRA
     =========================================*/
-
     formatarData(data) {
 
         if (!data) return "";
 
-        return new Date(data)
-            .toLocaleDateString("pt-BR");
+        // Data vinda do input type="date"
+        if (typeof data === "string" && data.includes("-")) {
 
+            const partes = data.split("-");
+
+            if (partes.length === 3) {
+
+                return `${partes[2]}/${partes[1]}/${partes[0]}`;
+
+            }
+
+        }
+
+        // ISO DateTime
+        const d = new Date(data);
+
+        if (!isNaN(d.getTime())) {
+
+            return d.toLocaleDateString("pt-BR");
+
+        }
+
+        return data;
     },
 
     /*=========================================
             DATA E HORA
     =========================================*/
-
     formatarDataHora(data) {
 
         if (!data) return "";
 
-        return new Date(data)
-            .toLocaleString("pt-BR");
+        const d = new Date(data);
+
+        if (isNaN(d.getTime())) return "";
+
+        return d.toLocaleString("pt-BR");
 
     },
 
     /*=========================================
             CPF
     =========================================*/
-
     formatarCPF(cpf) {
 
-        cpf = cpf.replace(/\D/g, '');
+        if (!cpf) return "";
+
+        cpf = cpf.replace(/\D/g, "");
 
         cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
 
@@ -94,25 +114,20 @@ const Utils = {
     /*=========================================
             TELEFONE
     =========================================*/
-
     formatarTelefone(numero) {
 
-        numero = numero.replace(/\D/g, '');
+        if (!numero) return "";
+
+        numero = numero.replace(/\D/g, "");
 
         numero = numero.replace(
-
             /^(\d{2})(\d)/,
-
             "($1) $2"
-
         );
 
         numero = numero.replace(
-
             /(\d{5})(\d)/,
-
             "$1-$2"
-
         );
 
         return numero;
@@ -122,12 +137,13 @@ const Utils = {
     /*=========================================
             FOTO
     =========================================*/
-
     imagemBase64(file, callback) {
+
+        if (!file) return;
 
         const reader = new FileReader();
 
-        reader.onload = e => {
+        reader.onload = function (e) {
 
             callback(e.target.result);
 
@@ -140,7 +156,6 @@ const Utils = {
     /*=========================================
             SAUDAÇÃO
     =========================================*/
-
     saudacao() {
 
         const hora = new Date().getHours();
@@ -164,7 +179,6 @@ const Utils = {
     /*=========================================
             MENSAGEM
     =========================================*/
-
     mensagem(texto) {
 
         alert(texto);
