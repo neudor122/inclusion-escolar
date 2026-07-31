@@ -985,4 +985,4 @@ if(!localStorage.getItem(Storage.chaves.AVISOS)){
 
 }
 
-},
+}
