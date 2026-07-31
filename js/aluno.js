@@ -766,3 +766,65 @@ function voltarAlunos(){
 
 
 }
+
+/*==================================================
+                CARREGAR FOTO
+==================================================*/
+
+function carregarFoto(event){
+
+
+    const arquivo =
+        event.target.files[0];
+
+
+    if(!arquivo){
+
+        return;
+
+    }
+
+
+
+    const leitor =
+        new FileReader();
+
+
+
+
+    leitor.onload = function(e){
+
+
+        fotoAluno =
+            e.target.result;
+
+
+
+        const preview =
+            document.getElementById(
+                "previewFoto"
+            );
+
+
+
+        if(preview){
+
+
+            preview.src =
+                fotoAluno;
+
+
+        }
+
+
+    };
+
+
+
+
+    leitor.readAsDataURL(
+        arquivo
+    );
+
+
+}
