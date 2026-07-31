@@ -1,4 +1,3 @@
-```javascript
 /*==================================================
                 TURMAS.JS
         Gerenciamento de Turmas
@@ -848,4 +847,3 @@ function limparFormulario(){
 
 
 }
-```
