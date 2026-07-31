@@ -416,17 +416,20 @@ getAlunosDaTurma(idTurma){
 contarAlunosTurma(idTurma){
 
 
-
     return this.getAlunosDaTurma(
 
         idTurma
 
     ).length;
 
+
+},
+
+
+
 /*==================================================
                 ATENDIMENTOS
 ==================================================*/
-
 
 getAtendimentos(){
 
