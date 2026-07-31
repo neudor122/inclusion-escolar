@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function configurarEventos() {
 
 
-
     const btnNovaTurma =
         document.getElementById(
             "btnNovaTurma"
@@ -68,16 +67,13 @@ function configurarEventos() {
 
 
 
+
+
     if(btnNovaTurma){
 
 
-        btnNovaTurma.addEventListener(
-
-            "click",
-
-            abrirModal
-
-        );
+        btnNovaTurma.onclick =
+            abrirModal;
 
 
     }
@@ -90,13 +86,8 @@ function configurarEventos() {
     if(btnSalvar){
 
 
-        btnSalvar.addEventListener(
-
-            "click",
-
-            salvarTurma
-
-        );
+        btnSalvar.onclick =
+            salvarTurma;
 
 
     }
@@ -159,7 +150,6 @@ function configurarEventos() {
 function abrirModal(){
 
 
-
     const modal =
         document.getElementById(
             "modalTurma"
@@ -188,14 +178,11 @@ function abrirModal(){
 function fecharModal(event){
 
 
-
     if(event.target.id === "modalTurma"){
-
 
 
         event.target.style.display =
             "none";
-
 
 
     }
@@ -210,7 +197,6 @@ function fecharModal(event){
 
 
 function fechar(){
-
 
 
     const modal =
@@ -231,9 +217,7 @@ function fechar(){
 
 
 
-
     limparFormulario();
-
 
 
 }
@@ -252,7 +236,6 @@ function fechar(){
 
 
 function carregarTurmas(){
-
 
 
     turmas =
@@ -295,6 +278,7 @@ function salvarTurma(){
 
 
 
+
     const sala =
         document
         .getElementById(
@@ -302,6 +286,7 @@ function salvarTurma(){
         )
         .value
         .trim();
+
 
 
 
@@ -317,6 +302,7 @@ function salvarTurma(){
 
 
 
+
     const turno =
         document
         .getElementById(
@@ -328,11 +314,15 @@ function salvarTurma(){
 
 
 
+
+
     if(!nome){
 
 
         Utils.mensagem(
+
             "Informe o nome da turma."
+
         );
 
 
@@ -340,6 +330,8 @@ function salvarTurma(){
 
 
     }
+
+
 
 
 
@@ -359,13 +351,10 @@ function salvarTurma(){
         nome,
 
 
-
         sala,
 
 
-
         professor,
-
 
 
         turno,
@@ -386,9 +375,11 @@ function salvarTurma(){
 
 
 
+
     Storage.addTurma(
         turma
     );
+
 
 
 
@@ -407,12 +398,13 @@ function salvarTurma(){
 
 
 
+
     Utils.mensagem(
 
         "Turma criada com sucesso!"
 
     );
-/*==================================================
+  /*==================================================
             MOSTRAR TURMAS
 ==================================================*/
 
@@ -489,12 +481,12 @@ function renderizarTurmas(lista){
 
 
 
+
         const quantidade =
 
             Storage.getAlunosDaTurma(
                 turma.id
             ).length;
-
 
 
 
@@ -577,7 +569,6 @@ function renderizarTurmas(lista){
 
 
 
-
             <button
 
             class="btn btn-primary"
@@ -589,6 +580,7 @@ function renderizarTurmas(lista){
 
 
             </button>
+
 
 
 
@@ -661,9 +653,7 @@ function removerTurma(id){
 
 
 
-
     Storage.removeTurma(id);
-
 
 
 
@@ -692,6 +682,7 @@ function pesquisarTurma(){
 
     const texto =
 
+
         document
         .getElementById(
             "pesquisa"
@@ -704,7 +695,10 @@ function pesquisarTurma(){
 
 
 
+
+
     const resultado =
+
 
         turmas.filter(turma => {
 
@@ -765,6 +759,7 @@ function abrirTurma(id){
 
 
 
+
     window.location.href =
 
         "alunos.html";
@@ -808,6 +803,7 @@ function limparFormulario(){
 
 
 
+
     campos.forEach(id => {
 
 
@@ -817,6 +813,7 @@ function limparFormulario(){
             document.getElementById(
                 id
             );
+
 
 
 
@@ -840,14 +837,12 @@ function limparFormulario(){
 
 
 
-
     const turno =
 
         document.getElementById(
-
             "turnoTurma"
-
         );
+
 
 
 
@@ -855,9 +850,7 @@ function limparFormulario(){
     if(turno){
 
 
-
         turno.selectedIndex = 0;
-
 
 
     }
@@ -865,6 +858,7 @@ function limparFormulario(){
 
 
 }
+
 
 
 }
