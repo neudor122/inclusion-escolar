@@ -1,4 +1,3 @@
-```javascript
 /*==================================================
                 ALUNO.JS
         Cadastro e edição de aluno
@@ -1117,4 +1116,3 @@ function carregarFoto(event){
 
 
 }
-```
