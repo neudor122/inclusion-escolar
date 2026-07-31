@@ -1,3 +1,4 @@
+```javascript
 /*==================================================
                 ALUNOS.JS
         Gerenciamento de alunos
@@ -7,7 +8,6 @@
 let alunos = [];
 
 let fotoBase64 = "";
-
 
 
 
@@ -135,6 +135,7 @@ function carregarFoto(event) {
 
 
 
+
     leitor.readAsDataURL(arquivo);
 
 
@@ -159,7 +160,7 @@ function carregarAlunos() {
 
 
     alunos =
-        Storage.getAlunos();
+        Storage.getAlunos() || [];
 
 
 
@@ -212,7 +213,8 @@ function renderizarAlunos() {
 
 
     const turmas =
-        Storage.getTurmas();
+        Storage.getTurmas() || [];
+
 
 
 
@@ -265,14 +267,12 @@ function renderizarAlunos() {
 
 
 
+        const turma = turmas.find(
 
-                const turma =
+            t =>
+            Number(t.id) === Number(aluno.turmaId)
 
-                    turmas.find(
-                        t =>
-                        t.id === aluno.turmaId
-                    );
-
+        );
 
 
 
@@ -280,8 +280,7 @@ function renderizarAlunos() {
 
 
 
-
-                lista.innerHTML += `
+        lista.innerHTML += `
 
 
         <tr>
@@ -297,6 +296,7 @@ function renderizarAlunos() {
                     ?
 
                     `
+
                     <img
 
                     src="${aluno.foto}"
@@ -311,6 +311,7 @@ function renderizarAlunos() {
                     "
 
                     >
+
                     `
 
                     :
@@ -321,6 +322,7 @@ function renderizarAlunos() {
 
 
             </td>
+
 
 
 
@@ -340,17 +342,24 @@ function renderizarAlunos() {
 
 
 
+
             <td>
 
                 ${
                     turma
+
                     ?
+
                     turma.nome
+
                     :
+
                     "-"
+
                 }
 
             </td>
+
 
 
 
@@ -362,8 +371,11 @@ function renderizarAlunos() {
 
                 ${
                     aluno.necessidade
+
                     ||
+
                     "-"
+
                 }
 
             </td>
@@ -375,7 +387,9 @@ function renderizarAlunos() {
 
 
 
+
             <td>
+
 
 
 
@@ -397,6 +411,9 @@ function renderizarAlunos() {
 
 
 
+
+
+
                 <button
 
                 class="btn btn-danger"
@@ -408,6 +425,8 @@ function renderizarAlunos() {
 
 
                 </button>
+
+
 
 
 
@@ -456,9 +475,10 @@ function abrirFicha(id){
 
         "alunoSelecionado",
 
-        id
+        Number(id)
 
     );
+
 
 
 
@@ -508,7 +528,11 @@ function removerAluno(id){
 
 
 
-    Storage.removeAluno(id);
+    Storage.removeAluno(
+
+        Number(id)
+
+    );
 
 
 
@@ -519,3 +543,4 @@ function removerAluno(id){
 
 
 }
+```
