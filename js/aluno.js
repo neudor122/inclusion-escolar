@@ -388,6 +388,168 @@ function verificarEdicao() {
 }
 
 /*==================================================
+                SALVAR ALUNO
+==================================================*/
+
+function salvarAluno(event) {
+
+
+    event.preventDefault();
+
+
+
+    const nome =
+        document.getElementById("nome").value.trim();
+
+
+
+    const dataNascimento =
+        document.getElementById("dataNascimento").value;
+
+
+
+    const responsavel =
+        document.getElementById("responsavel").value.trim();
+
+
+
+    const necessidade =
+        document.getElementById("necessidade").value.trim();
+
+
+
+    const observacao =
+        document.getElementById("observacao").value.trim();
+
+
+
+    const turmaId =
+        document.getElementById("turma").value;
+
+
+
+
+    if(!nome){
+
+
+        Utils.mensagem(
+            "Informe o nome do aluno."
+        );
+
+
+        return;
+
+    }
+
+
+
+
+    const aluno = {
+
+
+        id:
+
+            alunoEditando ||
+
+            Utils.gerarId(),
+
+
+
+        nome,
+
+
+        dataNascimento,
+
+
+        responsavel,
+
+
+        necessidade,
+
+
+        observacao,
+
+
+        turmaId:
+
+            Number(turmaId),
+
+
+
+        foto:
+
+            fotoAluno,
+
+
+
+        dataCadastro:
+
+            new Date().toISOString()
+
+
+    };
+
+
+
+
+
+
+    if(alunoEditando){
+
+
+        Storage.updateAluno(aluno);
+
+
+
+        Utils.mensagem(
+
+            "Aluno atualizado com sucesso!"
+
+        );
+
+
+    }else{
+
+
+        Storage.addAluno(aluno);
+
+
+
+        Utils.mensagem(
+
+            "Aluno cadastrado com sucesso!"
+
+        );
+
+
+    }
+
+
+
+
+
+    localStorage.removeItem(
+        "alunoEditando"
+    );
+
+
+
+
+
+    setTimeout(()=>{
+
+
+        window.location.href =
+            "alunos.html";
+
+
+    },500);
+
+
+
+}
+
+/*==================================================
         HISTÓRICO DE ATENDIMENTOS
 ==================================================*/
 
