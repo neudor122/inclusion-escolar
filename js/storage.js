@@ -582,45 +582,28 @@ const Storage = {
 ==================================================*/
 
 
-    getAvisos(){
+getAvisos(){
 
 
-        let avisos =
-        this.buscar(
-            this.chaves.AVISOS
-        );
+    const avisos = this.buscar(
+
+        this.chaves.AVISOS
+
+    );
 
 
+    return Array.isArray(avisos)
 
-        if(typeof avisos === "string"){
+        ?
 
+        avisos
 
-            try{
+        :
 
-                avisos =
-                JSON.parse(avisos);
-
-
-            }
-            catch{
-
-                avisos = [];
-
-            }
+        [];
 
 
-        }
-
-
-
-        return Array.isArray(avisos)
-            ?
-            avisos
-            :
-            [];
-
-
-    },
+},
 
 
 
@@ -665,104 +648,136 @@ const Storage = {
                 EXPORTAR DADOS
 ==================================================*/
 
-
-    exportarDados(){
-
+exportarDados(){
 
 
-        const dados = {
+    const dados = {
 
 
+        turmas:
 
-            turmas:
-            this.getTurmas(),
+            Array.isArray(this.getTurmas())
 
+            ?
 
+            this.getTurmas()
 
-            alunos:
-            this.getAlunos(),
+            :
 
-
-
-            atendimentos:
-            this.getAtendimentos(),
+            [],
 
 
 
-            avisos:
+        alunos:
+
+            Array.isArray(this.getAlunos())
+
+            ?
+
+            this.getAlunos()
+
+            :
+
+            [],
+
+
+
+        atendimentos:
+
+            Array.isArray(this.getAtendimentos())
+
+            ?
+
+            this.getAtendimentos()
+
+            :
+
+            [],
+
+
+
+        avisos:
+
+            Array.isArray(this.getAvisos())
+
+            ?
+
             this.getAvisos()
 
+            :
+
+            []
 
 
-        };
-
-
-
-
-
-        const blob =
-        new Blob(
-
-
-            [
-
-                JSON.stringify(
-
-                    dados,
-
-                    null,
-
-                    2
-
-                )
-
-            ],
-
-
-            {
-
-                type:
-                "application/json"
-
-            }
-
-
-        );
+    };
 
 
 
 
 
+    const arquivo = JSON.stringify(
 
-        const link =
-        document.createElement("a");
+        dados,
+
+        null,
+
+        2
+
+    );
 
 
 
-        link.href =
-        URL.createObjectURL(blob);
+
+
+    const blob = new Blob(
+
+        [
+
+            arquivo
+
+        ],
+
+        {
+
+            type:
+
+            "application/json"
+
+        }
+
+    );
 
 
 
-        link.download =
+
+
+    const link = document.createElement("a");
+
+
+
+    link.href = URL.createObjectURL(blob);
+
+
+
+    link.download =
+
         "backup-inclusao-escolar.json";
 
 
 
-        link.click();
+    document.body.appendChild(link);
 
 
 
-    },
+    link.click();
 
 
 
+    document.body.removeChild(link);
 
 
 
-
-
-
+}
 /*==================================================
                 IMPORTAR DADOS
 ==================================================*/
