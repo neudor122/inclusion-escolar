@@ -1,3 +1,4 @@
+```javascript
 /*==================================================
                 STORAGE.JS
         Banco de dados local - Inclusão Escolar
@@ -5,11 +6,6 @@
 
 
 const Storage = {
-
-
-    /*==================================================
-                    CHAVES
-    ==================================================*/
 
 
     chaves:{
@@ -29,10 +25,10 @@ const Storage = {
 
 
 
-
     /*==================================================
                     AUXILIARES
     ==================================================*/
+
 
 
     salvar(chave, dados){
@@ -73,7 +69,6 @@ const Storage = {
 
 
 
-
     /*==================================================
                     TURMAS
     ==================================================*/
@@ -102,9 +97,7 @@ const Storage = {
         const turmas = this.getTurmas();
 
 
-
         turmas.push(turma);
-
 
 
         this.salvar(
@@ -131,7 +124,9 @@ const Storage = {
 
         turmas = turmas.filter(turma =>
 
+
             Number(turma.id) !== Number(id)
+
 
         );
 
@@ -155,18 +150,19 @@ const Storage = {
     getTurma(id){
 
 
-        const turmas = this.getTurmas();
+        return this.getTurmas().find(turma =>
 
-
-
-        return turmas.find(turma =>
 
             Number(turma.id) === Number(id)
+
 
         );
 
 
     },
+
+
+
 
 
 
@@ -233,9 +229,11 @@ const Storage = {
 
             Number(aluno.id) === Number(alunoAtualizado.id)
 
+
             ?
 
             alunoAtualizado
+
 
             :
 
@@ -296,11 +294,7 @@ const Storage = {
     getAluno(id){
 
 
-        const alunos = this.getAlunos();
-
-
-
-        return alunos.find(aluno =>
+        return this.getAlunos().find(aluno =>
 
 
             Number(aluno.id) === Number(id)
@@ -316,6 +310,9 @@ const Storage = {
 
 
 
+
+
+
     /*==================================================
                 ALUNOS POR TURMA
     ==================================================*/
@@ -325,11 +322,7 @@ const Storage = {
     getAlunosDaTurma(idTurma){
 
 
-        const alunos = this.getAlunos();
-
-
-
-        return alunos.filter(aluno =>
+        return this.getAlunos().filter(aluno =>
 
 
             Number(aluno.turmaId) === Number(idTurma)
@@ -347,14 +340,12 @@ const Storage = {
     contarAlunosTurma(idTurma){
 
 
-        return this.getAlunosDaTurma(
-
-            idTurma
-
-        ).length;
+        return this.getAlunosDaTurma(idTurma).length;
 
 
     },
+
+
 
 
 
@@ -387,19 +378,17 @@ const Storage = {
     addAtendimento(atendimento){
 
 
-        const atendimentos = this.getAtendimentos();
+        const lista = this.getAtendimentos();
 
 
-
-        atendimentos.push(atendimento);
-
+        lista.push(atendimento);
 
 
         this.salvar(
 
             this.chaves.ATENDIMENTOS,
 
-            atendimentos
+            lista
 
         );
 
@@ -408,35 +397,6 @@ const Storage = {
 
 
 
-
-
-    removeAtendimento(id){
-
-
-        let atendimentos = this.getAtendimentos();
-
-
-
-        atendimentos = atendimentos.filter(item =>
-
-
-            Number(item.id) !== Number(id)
-
-
-        );
-
-
-
-        this.salvar(
-
-            this.chaves.ATENDIMENTOS,
-
-            atendimentos
-
-        );
-
-
-    },
 
 
 
@@ -486,6 +446,117 @@ const Storage = {
 
 
 
+
+    /*==================================================
+            NORMALIZAR ALUNOS IMPORTADOS
+    ==================================================*/
+
+
+
+    normalizarAlunos(alunos){
+
+
+        return alunos.map(aluno => ({
+
+
+            id:
+
+                Number(aluno.id)
+
+                ||
+
+                Utils.gerarId(),
+
+
+
+
+            nome:
+
+                aluno.nome || "",
+
+
+
+
+
+            dataNascimento:
+
+                aluno.dataNascimento
+
+                ||
+
+                aluno.nascimento
+
+                ||
+
+                "",
+
+
+
+
+            responsavel:
+
+                aluno.responsavel || "",
+
+
+
+
+
+            necessidade:
+
+                aluno.necessidade || "",
+
+
+
+
+
+            observacao:
+
+                aluno.observacao || "",
+
+
+
+
+
+            turmaId:
+
+                Number(aluno.turmaId)
+
+                ||
+
+                null,
+
+
+
+
+
+            foto:
+
+                aluno.foto || "",
+
+
+
+
+
+            dataCadastro:
+
+                aluno.dataCadastro || ""
+
+
+
+        }));
+
+
+
+    },
+
+
+
+
+
+
+
+
+
     /*==================================================
                 EXPORTAR DADOS
     ==================================================*/
@@ -498,39 +569,38 @@ const Storage = {
         const dados = {
 
 
-            turmas: this.getTurmas(),
+            turmas:this.getTurmas(),
 
 
-            alunos: this.getAlunos(),
+            alunos:this.getAlunos(),
 
 
-            atendimentos: this.getAtendimentos(),
+            atendimentos:this.getAtendimentos(),
 
 
-            avisos: this.getAvisos()
+            avisos:this.getAvisos()
 
 
         };
 
 
 
-
-        const arquivo = JSON.stringify(
-
-            dados,
-
-            null,
-
-            2
-
-        );
-
-
-
-
         const blob = new Blob(
 
-            [arquivo],
+            [
+
+                JSON.stringify(
+
+                    dados,
+
+                    null,
+
+                    2
+
+                )
+
+            ],
+
 
             {
 
@@ -542,9 +612,7 @@ const Storage = {
 
 
 
-
         const link = document.createElement("a");
-
 
 
         link.href = URL.createObjectURL(blob);
@@ -569,6 +637,7 @@ const Storage = {
 
 
 
+
     /*==================================================
                 IMPORTAR DADOS
     ==================================================*/
@@ -578,7 +647,9 @@ const Storage = {
     importarDados(event){
 
 
-        const arquivo = event.target.files[0];
+        const arquivo =
+
+            event.target.files[0];
 
 
 
@@ -591,7 +662,9 @@ const Storage = {
 
 
 
+
         const leitor = new FileReader();
+
 
 
 
@@ -599,7 +672,9 @@ const Storage = {
         leitor.onload = function(e){
 
 
+
             try{
+
 
 
                 const dados = JSON.parse(
@@ -607,6 +682,7 @@ const Storage = {
                     e.target.result
 
                 );
+
 
 
 
@@ -622,7 +698,11 @@ const Storage = {
 
                     );
 
+
                 }
+
+
+
 
 
 
@@ -634,11 +714,20 @@ const Storage = {
 
                         Storage.chaves.ALUNOS,
 
-                        dados.alunos
+                        Storage.normalizarAlunos(
+
+                            dados.alunos
+
+                        )
 
                     );
 
+
                 }
+
+
+
+
 
 
 
@@ -654,7 +743,11 @@ const Storage = {
 
                     );
 
+
                 }
+
+
+
 
 
 
@@ -670,7 +763,10 @@ const Storage = {
 
                     );
 
+
                 }
+
+
 
 
 
@@ -692,6 +788,11 @@ const Storage = {
             catch(error){
 
 
+
+                console.error(error);
+
+
+
                 alert(
 
                     "Arquivo inválido."
@@ -706,10 +807,14 @@ const Storage = {
 
 
 
+
+
         leitor.readAsText(arquivo);
 
 
+
     },
+
 
 
 
@@ -727,32 +832,15 @@ const Storage = {
     limparTudo(){
 
 
-        localStorage.removeItem(
+        Object.values(this.chaves)
 
-            this.chaves.TURMAS
-
-        );
+        .forEach(chave =>{
 
 
-        localStorage.removeItem(
-
-            this.chaves.ALUNOS
-
-        );
+            localStorage.removeItem(chave);
 
 
-        localStorage.removeItem(
-
-            this.chaves.ATENDIMENTOS
-
-        );
-
-
-        localStorage.removeItem(
-
-            this.chaves.AVISOS
-
-        );
+        });
 
 
     }
@@ -768,69 +856,26 @@ const Storage = {
 
 
 
-/*==================================================
-        CRIAR BANCO VAZIO AUTOMÁTICO
-==================================================*/
+
+Object.values(Storage.chaves)
+
+.forEach(chave =>{
 
 
-if(!localStorage.getItem(Storage.chaves.TURMAS)){
+    if(!localStorage.getItem(chave)){
 
 
-    localStorage.setItem(
+        localStorage.setItem(
 
-        Storage.chaves.TURMAS,
+            chave,
 
-        JSON.stringify([])
+            JSON.stringify([])
 
-    );
-
-
-}
+        );
 
 
-
-if(!localStorage.getItem(Storage.chaves.ALUNOS)){
-
-
-    localStorage.setItem(
-
-        Storage.chaves.ALUNOS,
-
-        JSON.stringify([])
-
-    );
+    }
 
 
-}
-
-
-
-if(!localStorage.getItem(Storage.chaves.ATENDIMENTOS)){
-
-
-    localStorage.setItem(
-
-        Storage.chaves.ATENDIMENTOS,
-
-        JSON.stringify([])
-
-    );
-
-
-}
-
-
-
-if(!localStorage.getItem(Storage.chaves.AVISOS)){
-
-
-    localStorage.setItem(
-
-        Storage.chaves.AVISOS,
-
-        JSON.stringify([])
-
-    );
-
-
-}
+});
+```
