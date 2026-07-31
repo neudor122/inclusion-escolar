@@ -404,6 +404,7 @@ function salvarTurma(){
         "Turma criada com sucesso!"
 
     );
+}
   /*==================================================
             MOSTRAR TURMAS
 ==================================================*/
@@ -852,13 +853,5 @@ function limparFormulario(){
 
         turno.selectedIndex = 0;
 
-
     }
-
-
-
-}
-
-
-
 }
