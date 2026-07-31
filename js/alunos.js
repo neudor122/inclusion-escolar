@@ -1,4 +1,3 @@
-```javascript
 /*==================================================
                 ALUNOS.JS
         Gerenciamento de alunos
@@ -543,4 +542,3 @@ function removerAluno(id){
 
 
 }
-```
