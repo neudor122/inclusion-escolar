@@ -8,15 +8,20 @@ let turmas = [];
 
 
 
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
 
     carregarTurmas();
 
+
     configurarEventos();
 
 
 });
+
+
 
 
 
@@ -32,42 +37,67 @@ document.addEventListener("DOMContentLoaded", () => {
 function configurarEventos() {
 
 
+
     const btnNovaTurma =
-        document.getElementById("btnNovaTurma");
+        document.getElementById(
+            "btnNovaTurma"
+        );
 
 
 
     const btnSalvar =
-        document.getElementById("salvarTurma");
+        document.getElementById(
+            "salvarTurma"
+        );
 
 
 
     const pesquisa =
-        document.getElementById("pesquisa");
+        document.getElementById(
+            "pesquisa"
+        );
 
 
 
     const modal =
-        document.getElementById("modalTurma");
+        document.getElementById(
+            "modalTurma"
+        );
 
 
 
 
 
-    if (btnNovaTurma) {
+    if(btnNovaTurma){
 
-        btnNovaTurma.onclick =
-            abrirModal;
+
+        btnNovaTurma.addEventListener(
+
+            "click",
+
+            abrirModal
+
+        );
+
 
     }
 
 
 
 
-    if (btnSalvar) {
 
-        btnSalvar.onclick =
-            salvarTurma;
+
+    if(btnSalvar){
+
+
+        btnSalvar.addEventListener(
+
+            "click",
+
+            salvarTurma
+
+        );
+
 
     }
 
@@ -76,13 +106,17 @@ function configurarEventos() {
 
 
 
+    if(pesquisa){
 
-    if (pesquisa) {
 
         pesquisa.addEventListener(
+
             "input",
+
             pesquisarTurma
+
         );
+
 
     }
 
@@ -91,15 +125,20 @@ function configurarEventos() {
 
 
 
+    if(modal){
 
-    if (modal) {
 
         modal.addEventListener(
+
             "click",
+
             fecharModal
+
         );
 
+
     }
+
 
 
 }
@@ -117,17 +156,23 @@ function configurarEventos() {
 ==================================================*/
 
 
-function abrirModal() {
+function abrirModal(){
+
 
 
     const modal =
-        document.getElementById("modalTurma");
+        document.getElementById(
+            "modalTurma"
+        );
 
 
 
-    if (modal) {
+    if(modal){
 
-        modal.style.display = "flex";
+
+        modal.style.display =
+            "flex";
+
 
     }
 
@@ -140,19 +185,20 @@ function abrirModal() {
 
 
 
-function fecharModal(event) {
+function fecharModal(event){
 
 
 
-    if (event.target.id === "modalTurma") {
+    if(event.target.id === "modalTurma"){
+
 
 
         event.target.style.display =
             "none";
 
 
-    }
 
+    }
 
 
 }
@@ -163,24 +209,31 @@ function fecharModal(event) {
 
 
 
-function fechar() {
+function fechar(){
+
 
 
     const modal =
-        document.getElementById("modalTurma");
+        document.getElementById(
+            "modalTurma"
+        );
 
 
 
-    if (modal) {
+    if(modal){
+
 
         modal.style.display =
             "none";
+
 
     }
 
 
 
+
     limparFormulario();
+
 
 
 }
@@ -198,7 +251,8 @@ function fechar() {
 ==================================================*/
 
 
-function carregarTurmas() {
+function carregarTurmas(){
+
 
 
     turmas =
@@ -226,13 +280,15 @@ function carregarTurmas() {
 ==================================================*/
 
 
-function salvarTurma() {
+function salvarTurma(){
 
 
 
     const nome =
         document
-        .getElementById("nomeTurma")
+        .getElementById(
+            "nomeTurma"
+        )
         .value
         .trim();
 
@@ -241,7 +297,9 @@ function salvarTurma() {
 
     const sala =
         document
-        .getElementById("salaTurma")
+        .getElementById(
+            "salaTurma"
+        )
         .value
         .trim();
 
@@ -250,7 +308,9 @@ function salvarTurma() {
 
     const professor =
         document
-        .getElementById("professorTurma")
+        .getElementById(
+            "professorTurma"
+        )
         .value
         .trim();
 
@@ -259,17 +319,16 @@ function salvarTurma() {
 
     const turno =
         document
-        .getElementById("turnoTurma")
+        .getElementById(
+            "turnoTurma"
+        )
         .value;
 
 
 
 
 
-
-
-
-    if (!nome) {
+    if(!nome){
 
 
         Utils.mensagem(
@@ -300,10 +359,13 @@ function salvarTurma() {
         nome,
 
 
+
         sala,
 
 
+
         professor,
+
 
 
         turno,
@@ -312,7 +374,8 @@ function salvarTurma() {
 
         dataCriacao:
 
-            new Date().toISOString()
+            new Date()
+            .toISOString()
 
 
 
@@ -323,10 +386,9 @@ function salvarTurma() {
 
 
 
-
-
-    Storage.addTurma(turma);
-
+    Storage.addTurma(
+        turma
+    );
 
 
 
@@ -337,8 +399,8 @@ function salvarTurma() {
 
 
 
-    fechar();
 
+    fechar();
 
 
 
@@ -350,13 +412,12 @@ function salvarTurma() {
         "Turma criada com sucesso!"
 
     );
-   
 /*==================================================
             MOSTRAR TURMAS
 ==================================================*/
 
 
-function renderizarTurmas(lista) {
+function renderizarTurmas(lista){
 
 
 
@@ -367,12 +428,11 @@ function renderizarTurmas(lista) {
 
 
 
-    if (!container) {
+    if(!container){
 
         return;
 
     }
-
 
 
 
@@ -387,9 +447,7 @@ function renderizarTurmas(lista) {
 
 
 
-
-
-    if (lista.length === 0) {
+    if(lista.length === 0){
 
 
 
@@ -407,7 +465,6 @@ function renderizarTurmas(lista) {
 
 
         </div>
-
 
 
         `;
@@ -432,18 +489,11 @@ function renderizarTurmas(lista) {
 
 
 
-        /*
-            CORREÇÃO:
-            Usa Storage.contarAlunosTurma()
-            para evitar erro de número/string no ID
-        */
-
-
         const quantidade =
 
-            Storage.contarAlunosTurma(
+            Storage.getAlunosDaTurma(
                 turma.id
-            );
+            ).length;
 
 
 
@@ -456,10 +506,7 @@ function renderizarTurmas(lista) {
         container.innerHTML += `
 
 
-
         <div class="card">
-
-
 
 
 
@@ -473,11 +520,10 @@ function renderizarTurmas(lista) {
 
 
 
-
-
             <p>
 
                 🏫 Sala:
+
                 ${turma.sala || "-"}
 
             </p>
@@ -487,10 +533,10 @@ function renderizarTurmas(lista) {
 
 
 
-
             <p>
 
                 👨‍🏫 Professor:
+
                 ${turma.professor || "-"}
 
             </p>
@@ -504,6 +550,7 @@ function renderizarTurmas(lista) {
             <p>
 
                 🌞 Turno:
+
                 ${turma.turno || "-"}
 
             </p>
@@ -538,11 +585,10 @@ function renderizarTurmas(lista) {
             onclick="abrirTurma(${turma.id})">
 
 
-            Ver alunos
+                Ver alunos
 
 
             </button>
-
 
 
 
@@ -558,7 +604,7 @@ function renderizarTurmas(lista) {
             onclick="removerTurma(${turma.id})">
 
 
-            Excluir
+                Excluir
 
 
             </button>
@@ -570,8 +616,8 @@ function renderizarTurmas(lista) {
         </div>
 
 
-
         `;
+
 
 
 
@@ -589,23 +635,20 @@ function renderizarTurmas(lista) {
 
 
 
-
-
-
 /*==================================================
                 EXCLUIR
 ==================================================*/
 
 
-function removerTurma(id) {
+function removerTurma(id){
 
 
 
-    if (!confirm(
+    if(!confirm(
 
-            "Deseja excluir esta turma?"
+        "Deseja excluir esta turma?"
 
-        )) {
+    )){
 
 
         return;
@@ -619,8 +662,8 @@ function removerTurma(id) {
 
 
 
-
     Storage.removeTurma(id);
+
 
 
 
@@ -638,31 +681,23 @@ function removerTurma(id) {
 
 
 
-
-
-
 /*==================================================
                 PESQUISA
 ==================================================*/
 
 
-function pesquisarTurma() {
+function pesquisarTurma(){
 
 
 
     const texto =
 
-
         document
-
-        .getElementById("pesquisa")
-
+        .getElementById(
+            "pesquisa"
+        )
         .value
-
         .toLowerCase();
-
-
-
 
 
 
@@ -671,25 +706,19 @@ function pesquisarTurma() {
 
     const resultado =
 
-
-        turmas.filter(turma =>
-
+        turmas.filter(turma => {
 
 
 
-
-            turma.nome
+            return turma.nome
 
             .toLowerCase()
 
-            .includes(texto)
+            .includes(texto);
 
 
 
-
-
-        );
-
+        });
 
 
 
@@ -714,15 +743,12 @@ function pesquisarTurma() {
 
 
 
-
-
-
 /*==================================================
             ABRIR TURMA
 ==================================================*/
 
 
-function abrirTurma(id) {
+function abrirTurma(id){
 
 
 
@@ -733,8 +759,6 @@ function abrirTurma(id) {
         id
 
     );
-
-
 
 
 
@@ -757,15 +781,12 @@ function abrirTurma(id) {
 
 
 
-
-
-
 /*==================================================
             LIMPAR FORMULÁRIO
 ==================================================*/
 
 
-function limparFormulario() {
+function limparFormulario(){
 
 
 
@@ -787,19 +808,20 @@ function limparFormulario() {
 
 
 
-
     campos.forEach(id => {
 
 
 
         const campo =
 
-            document.getElementById(id);
+            document.getElementById(
+                id
+            );
 
 
 
 
-        if (campo) {
+        if(campo){
 
 
             campo.value = "";
@@ -808,7 +830,9 @@ function limparFormulario() {
         }
 
 
+
     });
+
 
 
 
@@ -828,10 +852,12 @@ function limparFormulario() {
 
 
 
-    if (turno) {
+    if(turno){
+
 
 
         turno.selectedIndex = 0;
+
 
 
     }
@@ -839,7 +865,6 @@ function limparFormulario() {
 
 
 }
-
 
 
 }
