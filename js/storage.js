@@ -1,4 +1,3 @@
-```javascript
 /*==================================================
                 STORAGE.JS
         Banco de dados local - Inclusão Escolar
@@ -878,4 +877,3 @@ Object.values(Storage.chaves)
 
 
 });
-```
